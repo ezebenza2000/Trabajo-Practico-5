@@ -1,0 +1,7 @@
+EZE Ministro-Pistarini Ezeiza Argentina 34.75 4 12 46
+LAX Aeropuerto-Internacional-de-los-Angeles Los-Angeles EEUU 14 9 87 69
+AEP Aeroparque-Jorge-Newbery Buenos-Aires Argentina 25.3 6 10 0
+FRA Aeropuerto-de-Fráncfort-del-Meno Fráncfort-del-Meno Alemania 12.4 5 22 6
+IBZ Aeropuerto-de-Ibiza Ibiza España 23 7 65 12
+YOW Aeropuerto-Internacional-de-Ottawa Ottawa Canada 44.2 3 35 20
+LAS Aeropuerto-Internacional-de-Las-Vegas Las-Vegas EEUU 60 10 25 73
