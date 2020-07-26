@@ -11,7 +11,7 @@ private:
     string nombre;
     string ciudad;
     string pais;
-    int superficie;
+    double superficie;
     int cantidad_terminales;
     int destinos_nacionales;
     int destinos_internacionales;
@@ -19,7 +19,7 @@ private:
 public:
     //Constructor de la clase.
     //POST: Construye la clase con los datos proporcionados.
-    Aeropuertos(string nombre, string ciudad, string pais, int superficie, int cantidad_terminales, int destinos_nacionales, int destinos_internacionales);
+    Aeropuertos(string nombre, string ciudad, string pais, double superficie, int cantidad_terminales, int destinos_nacionales, int destinos_internacionales);
 
     //POST: Devuelve el nombrel aeropuerto.
     string get_nombre();
@@ -31,7 +31,7 @@ public:
     string get_pais();
 
     //POST: Devuelve la superficie en hilometros cuadrados del aeropuerto.
-    int get_superficie();
+    double get_superficie();
 
     //POST: Devuelve la cantidad de terminales del aeropuerto.
     int get_cantidad_terminales();

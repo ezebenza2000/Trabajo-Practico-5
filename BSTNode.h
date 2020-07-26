@@ -20,6 +20,7 @@ private:
     BSTNode<T>* parent; //Nodo Padre
 
 public:
+    BSTNode<T> *prox;
 
     //construye el nodo con data y valor, de principio apuntando todos los punteros a NULL
     BSTNode(T data,Aeropuertos* valor);

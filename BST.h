@@ -3,6 +3,7 @@
 //
 
 #include "BSTNode.h"
+#include "cola.h"
 #include<iostream>
 
 #ifndef ABB_BST_H
@@ -19,7 +20,7 @@ private:
 
     // Pre: Objeto creado y recibe los datos;
     // Post: Compara en el arbol para ubicar por data
-    BSTNode<T>* insert(BSTNode<T>* node, T data,string mystr);
+    BSTNode<T>* insert(BSTNode<T>* node, T data,Aeropuertos* aeropuerto);
 
     //Pre: Objeto creado
     //Post: Imprime de manera recursiva buscando del que esta mas a la izquierda
@@ -64,7 +65,7 @@ public:
      // Pre : Objeto creado. Recibe un dato de tipo T y un string;
      // Post: Adds a new node to the actual BST. If its the tree is empty
      // the node inserted will be the root
-    void insert(T data,string mystr);
+    void insert(T data,Aeropuertos* aeropuerto);
 
     // Prints all the data stored in the BST, sorted from the
     // smallest value to the greatest value.
@@ -149,15 +150,16 @@ void BST<T>::print_in_order()
 }
 
 template <class T>
-void BST<T>::print_por_niveles(BSTNode<T> *node)
-{
-    if (node != NULL)
-    {
-        std::cout << "\n\nClave = " << node->get_data() << endl;
-        std::cout << node->get_valor()->mostrar_aeropuerto() << endl;
-        print_por_niveles(node->get_left());
-        print_por_niveles(node->get_right());
+void BST<T>::print_por_niveles(BSTNode<T> *node){
+    Cola* nuevaCola = new Cola()
+    nuevaCola->encolar(node);
+    while(!nuevaCola->esta_vacia()){
+        BSTNode<T>* aux = nuevaCola->desencolar();
+        std::cout << "\n\nClave = " << aux->get_data() << endl;
+        nuevaCola->encolar(aux->get_left);
+        nuevaCola->encolar(aux->get_right);
     }
+    delete nuevaCola;
 }
 
 template <class T>
