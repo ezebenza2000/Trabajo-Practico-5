@@ -79,6 +79,8 @@ public:
     // TRUE, otherwise it returns FALSE.
     bool search(T data);
 
+    BSTNode<T>* search(T data)
+
     // Finds the minimum value that exist in the BST.
     T find_min();
 
@@ -186,6 +188,15 @@ bool BST<T>::search(T data)
     BSTNode<T>* result = search(this->root, data);
 
     return result != NULL;
+}
+
+
+template <class T>
+BSTNode<T>* BST<T>::search(T data)
+{
+    BSTNode<T>* result = search(this->root, data);
+
+    return result;
 }
 
 template <class T>
