@@ -5,7 +5,7 @@
 #ifndef ABB_BSTNODE_H
 #define ABB_BSTNODE_H
 #include <string.h>
-#include "Aeropuertos.h"
+#include "aeropuertos.h"
 using namespace std;
 
 template <class T>
@@ -20,7 +20,7 @@ private:
     BSTNode<T>* parent; //Nodo Padre
 
 public:
-    BSTNode<T> *prox;
+    BSTNode<T> *prox = NULL;
 
     //construye el nodo con data y valor, de principio apuntando todos los punteros a NULL
     BSTNode(T data,Aeropuertos* valor);

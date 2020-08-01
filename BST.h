@@ -31,9 +31,6 @@ private:
     //Post: Imprime el recorrido por niveles del arbol
     void print_por_niveles(BSTNode<T> *node);
 
-    //Compara dependiendo el valor, si esta o no
-    BSTNode<T>* search(BSTNode<T>* node, T data);
-
     //Busca en el arbol el valor mas chico
     T find_min(BSTNode<T>* node);
 
@@ -79,7 +76,8 @@ public:
     // TRUE, otherwise it returns FALSE.
     bool search(T data);
 
-    BSTNode<T>* search(T data)
+    //Compara dependiendo el valor, si esta o no
+    BSTNode<T>* search(BSTNode<T>* node, T data);
 
     // Finds the minimum value that exist in the BST.
     T find_min();
@@ -140,7 +138,8 @@ void BST<T>::print_in_order(BSTNode<T>* node)
     {
         print_in_order(node->get_left());
         std::cout<< "\n\nClave = " << node->get_data()<<endl;
-        std::cout<< node->get_valor()->mostrar_aeropuerto()<<endl;
+        node->get_valor()->mostrar_aeropuerto();
+        //std::cout<< node->get_valor()->mostrar_aeropuerto()<<endl;
         print_in_order(node->get_right());
     }
 }
@@ -153,13 +152,24 @@ void BST<T>::print_in_order()
 
 template <class T>
 void BST<T>::print_por_niveles(BSTNode<T> *node){
-    Cola* nuevaCola = new Cola()
-    nuevaCola->encolar(node);
+    Cola* nuevaCola = new Cola();
+    if(node != NULL) nuevaCola->cola_encolar(node);
     while(!nuevaCola->esta_vacia()){
-        BSTNode<T>* aux = nuevaCola->desencolar();
+        BSTNode<T>* aux = nuevaCola->cola_desencolar();
         std::cout << "\n\nClave = " << aux->get_data() << endl;
-        nuevaCola->encolar(aux->get_left);
-        nuevaCola->encolar(aux->get_right);
+        if(!(aux->isLeaf())){
+            if(aux->rightChildOnly()){
+                nuevaCola->cola_encolar(aux->get_right());
+            }
+            if(aux->leftChildOnly()){
+                nuevaCola->cola_encolar(aux->get_left());
+            }
+            else if (!aux->rightChildOnly() && !aux->leftChildOnly()){
+                nuevaCola->cola_encolar(aux->get_left());
+                nuevaCola->cola_encolar(aux->get_right());
+            }
+        }
+        else break;
     }
     delete nuevaCola;
 }
@@ -192,19 +202,11 @@ bool BST<T>::search(T data)
 
 
 template <class T>
-BSTNode<T>* BST<T>::search(T data)
-{
-    BSTNode<T>* result = search(this->root, data);
-
-    return result;
-}
-
-template <class T>
 T BST<T>::find_min(BSTNode<T>* node)
 {
-    if(node == NULL)
-        return -1;
-    else if(node->get_left() == NULL)
+    //if(node == NULL)
+        //return -1;
+    if(node->get_left() == NULL)
         return node->get_data();
     else
         return find_min(node->get_left());
@@ -258,9 +260,10 @@ T BST<T>::successor(T data)
 {
     BSTNode<T>* data_node = this->search(this->root, data);
     // Return the key. If the key is not found or successor is not found, return -1
-    if(data_node == NULL)
-        return -1;
-    else return successor(data_node);
+    //if(data_node == NULL)
+    //    return '-1';
+    //else 
+    return successor(data_node);
 }
 
 template <class T>
@@ -329,9 +332,10 @@ BSTNode<T> * BST<T>::remove(BSTNode<T>* node, T data)
         {
             // Find successor or predecessor to avoid quarrel
             T successor_data = this->successor(data);
+            Aeropuertos* valor = search(this->root,successor_data)->get_valor();
 
             // Replace node's key with successor's key
-            node->set_data(successor_data);
+            node->set_data(successor_data,valor);
 
             // Delete the old successor's key
             node->set_right(remove(node->get_right(), successor_data));
