@@ -106,6 +106,8 @@ void Aeropuertos :: set_destinos_internacionales(int destinos_internacionales){
 //POST: carga el objeto por consola
 void Aeropuertos::cargar_por_teclado(){
 	string carga;
+    double carga0;
+    int carga1;
 	cout<<"\n Nombre: ";
 	cin>>carga;
 	set_nombre(carga);
@@ -116,15 +118,15 @@ void Aeropuertos::cargar_por_teclado(){
 	cin>>carga;
 	set_pais(carga);
 	cout<<"\n Superfice";
-	cin>>carga;
-	set_superficie(carga);
+	cin>>carga0;
+	set_superficie(carga0);
 	cout<<"\n Cantidad Terminales: ";
-	cin>>carga;
-	set_cantidad_terminales(carga);
+	cin>>carga1;
+	set_cantidad_terminales(carga1);
 	cout<<"\n #Destinos Nacionales";
-	cin>>carga;
-	set_destinos_nacionales(carga);
+	cin>>carga1;
+	set_destinos_nacionales(carga1);
 	cout<<"\n #Destinos Internacionales";
-	cin>>carga;
-	set_nombre(carga);
+	cin>>carga1;
+	set_destinos_internacionales(carga1);
 }
