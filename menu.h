@@ -20,6 +20,10 @@ public:
     //Pre-Condicion: -
     //Post-Condicion: Imprime por pantalla las decisiones que tiene el usuario
     void mostrarMenu();
+    
+    //PRE : Recibe un string
+    //POST: Devuelve el string en mayuscula
+    string convertir (string mystr);
 
     //Procesa la opcion del usuario
     //Pre-Condicion: -
