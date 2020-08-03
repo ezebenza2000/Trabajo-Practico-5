@@ -158,17 +158,24 @@ void BST<T>::print_por_niveles(BSTNode<T> *node){
         BSTNode<T>* aux = nuevaCola->cola_desencolar();
         std::cout << "\n\nClave = " << aux->get_data() << endl;
         if(!(aux->isLeaf())){
-            if(aux->rightChildOnly()){
-                nuevaCola->cola_encolar(aux->get_right());
-            }
             if(aux->leftChildOnly()){
                 nuevaCola->cola_encolar(aux->get_left());
+                std :: cout << "Tengo hijo izq" << endl;
             }
-            else if (!aux->rightChildOnly() && !aux->leftChildOnly()){
+            if(aux->rightChildOnly()){
+                nuevaCola->cola_encolar(aux->get_right());
+                std :: cout << "Tengo hijo der" << endl;
+            }
+            if (!aux->rightChildOnly() && !aux->leftChildOnly()){
                 nuevaCola->cola_encolar(aux->get_left());
                 nuevaCola->cola_encolar(aux->get_right());
+                std :: cout << "Tengo ambos hijos" << endl;
             }
+
         }
+        else if(aux->isLeaf()){
+            std :: cout << "Soy hoja" << endl;
+		}
         else break;
     }
     delete nuevaCola;

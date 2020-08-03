@@ -11,13 +11,15 @@ bool Cola :: esta_vacia(){
 
 
 void Cola :: cola_encolar(BSTNode<string>* elemento){
+	elemento->prox = NULL;
     if(this->prim == NULL){
         this->prim = elemento;
-        this->ult = this->prim;
+        this->ult = elemento;
     }
-    BSTNode<string>* aux = this->ult;
-    aux->prox = elemento;
-    this->ult = elemento;
+    else{
+	    this->ult->prox = elemento;
+	    this->ult = elemento;
+    }
 }
 
 
