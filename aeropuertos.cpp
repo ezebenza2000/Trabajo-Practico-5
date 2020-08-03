@@ -15,6 +15,14 @@ Aeropuertos :: Aeropuertos(string IATA,string nombre, string ciudad, string pais
 }
 
 Aeropuertos :: Aeropuertos(){
+	this->IATA = " ";
+    this->nombre = " ";
+    this->ciudad = " ";
+    this->pais = " ";
+    this->superficie = 0.0;
+    this->cantidad_terminales = 0;
+    this->destinos_nacionales = 0;
+    this->destinos_internacionales = 0;
 }
 
 
@@ -93,4 +101,30 @@ void Aeropuertos :: set_destinos_nacionales(int destinos_nacionales){
 
 void Aeropuertos :: set_destinos_internacionales(int destinos_internacionales){
     this->destinos_internacionales = destinos_internacionales;
+}
+
+//POST: carga el objeto por consola
+void Aeropuertos::cargar_por_teclado(){
+	string carga;
+	cout<<"\n Nombre: ";
+	cin>>carga;
+	set_nombre(carga);
+	cout<<"\n Ciudad: ";
+	cin>>carga;
+	set_ciudad(carga);
+	cout<<"\n Pais: ";
+	cin>>carga;
+	set_pais(carga);
+	cout<<"\n Superfice";
+	cin>>carga;
+	set_superficie(carga);
+	cout<<"\n Cantidad Terminales: ";
+	cin>>carga;
+	set_cantidad_terminales(carga);
+	cout<<"\n #Destinos Nacionales";
+	cin>>carga;
+	set_destinos_nacionales(carga);
+	cout<<"\n #Destinos Internacionales";
+	cin>>carga;
+	set_nombre(carga);
 }

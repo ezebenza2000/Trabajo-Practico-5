@@ -74,6 +74,9 @@ public:
 
     //POST: setea la cantidad de destinos internacionales del aeropuerto.
     void set_destinos_internacionales(int destinos_internacionales);
+
+    //POST: carga el aeropuerto por teclado.
+    void cargar_por_teclado();
 };
 
 #endif //AEROPUERTOS_H
