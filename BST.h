@@ -376,6 +376,7 @@ void BST<T>::delete_all(BSTNode<T>* node)
         return;
     this->delete_all(node->get_left());
     this->delete_all(node->get_right());
+    delete node->get_valor();
     delete node;
 }
 
