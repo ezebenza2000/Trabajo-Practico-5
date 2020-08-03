@@ -16,13 +16,15 @@ int main(){
 	Archivos archivoDeAeropuertos;
 	archivoDeAeropuertos.abrirArchivo(RUTA);
 	while(!(archivoDeAeropuertos.finalArchivo())){
+
 		string datos = archivoDeAeropuertos.leerLinea();
-		if(!(datos.length() < 10)){
-			Aeropuertos* aeropuerto = new Aeropuertos();
-			archivoDeAeropuertos.cargar_aeropuerto(datos,aeropuerto);
-			diccionarioAeropuertos->insert(aeropuerto->get_clave(),aeropuerto);
-			//delete aeropuerto;
-		}
+        if (datos != ""){
+            cout <<"hola soy datos"<< datos << "termine datos"<< endl;
+            Aeropuertos* aeropuerto = new Aeropuertos();
+            archivoDeAeropuertos.cargar_aeropuerto(datos,aeropuerto);
+            diccionarioAeropuertos->insert(aeropuerto->get_clave(),aeropuerto);
+            //delete aeropuerto;
+        }
 	}
 	Menu menu(diccionarioAeropuertos);
 	while(menu.opcion != '6'){

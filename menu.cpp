@@ -2,6 +2,8 @@
 #include "BST.h"
 #include "aeropuertos.h"
 #include <iostream>
+#include <string>
+#include <ctype.h>
 
 Menu :: Menu(BST<string>* Diccionario_de_Aeropuertos){
     this->diccionario = Diccionario_de_Aeropuertos;
@@ -20,6 +22,7 @@ void Menu::mostrarMenu(){
     cin >> opcion;
 }
 
+
 bool Menu::selectorDeOpciones() {
 
     bool estado;
@@ -34,10 +37,18 @@ bool Menu::selectorDeOpciones() {
             string clave;
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
-            cout << "\n\t---------------------- Busqueda ------------------------------\n";
-            BSTNode<string>* aeropuerto = diccionario->search(diccionario->get_root(),clave);
-            aeropuerto->get_valor()->mostrar_aeropuerto();
-            cout << "\n\t--------------------------------------------------------------\n";
+            for (unsigned int i = 0; i < clave.length(); i++){
+                clave[i] = toupper(clave[i]);
+            }
+            if (diccionario->search(clave)){
+                cout << "\n\t---------------------- Busqueda ------------------------------\n";
+                BSTNode<string>* aeropuerto = diccionario->search(diccionario->get_root(),clave);
+                aeropuerto->get_valor()->mostrar_aeropuerto();
+                cout << "\n\t--------------------------------------------------------------\n";
+            }
+            else {
+                cout << "El codigo no esta" <<endl;
+            }
             estado = true;
             break;
         }
@@ -72,7 +83,7 @@ bool Menu::selectorDeOpciones() {
             estado = true;
             break;
         }
-        
+
         case '5': {
         	cout << "\t-------------------- Recorrido PN-------------------------------\n";
             diccionario->print_por_niveles();
