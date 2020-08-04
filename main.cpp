@@ -25,7 +25,7 @@ int main(){
         }
 	}
 	Menu menu(diccionarioAeropuertos);
-	while(menu.opcion != '6'){
+	while(menu.opcion != '7'){
 		menu.mostrarMenu();
 		menu.selectorDeOpciones();
 	}
