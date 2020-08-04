@@ -17,7 +17,8 @@ void Menu::mostrarMenu(){
     cout << "\t3. Baja\n";
     cout << "\t4. InOrder\n";
     cout << "\t5. Ancho\n";
-    cout << "\t6. Salir\n";
+    cout << "\t6. Abrir el menu de Grafos\n";
+    cout << "\t7. Salir\n";
     cout << "\tIngrese el numero de la opcion que desea seleccionar: ";
     cin >> opcion;
 }
@@ -37,19 +38,7 @@ bool Menu::selectorDeOpciones() {
             string clave;
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
-            for (unsigned int i = 0; i < clave.length(); i++){
-                clave[i] = toupper(clave[i]);
-            }
-            if (diccionario->search(clave)){
-                cout << "\n\t---------------------- Busqueda ------------------------------\n";
-                BSTNode<string>* aeropuerto = diccionario->search(diccionario->get_root(),clave);
-                *aeropuerto->get_valor()->mostrar_aeropuerto();
-                cout << "\n\t--------------------------------------------------------------\n";
-            }
-            else {
-                cout << "El codigo invalido" <<endl;
-            }
-            estado = true;
+            busca(clave, &estado);
             break;
         }
 
@@ -58,9 +47,8 @@ bool Menu::selectorDeOpciones() {
             string clave;
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
-            *aux.cargar_por_teclado();
             cout << "\t-------------------- Alta -------------------------------------\n";
-            diccionario->insert(clave,aux);
+            alta(clave, aux);
             cout << "\n\t--------------------------------------------------------------\n";
             estado = true;
             break;
@@ -72,10 +60,7 @@ bool Menu::selectorDeOpciones() {
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
             cout << "\t--------------------- Baja -------------------------------------\n";
-            BSTNode<string>* aeropuerto = diccionario->search(diccionario->get_root(),clave);
-            *aeropuerto->get_valor()->mostrar_aeropuerto();
-            diccionario->remove(clave);
-            cout<<"\n fue dado de baja"
+            baja(clave);
             cout << "\n\t--------------------------------------------------------------\n";
             estado = true;
             break;
@@ -97,8 +82,13 @@ bool Menu::selectorDeOpciones() {
             estado = true;
             break;
         }
-
+        
         case '6': {
+        	
+            break;
+        }
+
+        case '7': {
             break;
         }
 
@@ -109,4 +99,38 @@ bool Menu::selectorDeOpciones() {
         }
     }
     return estado;
+}
+
+ void Menu::alta(string clave, Aeropuertos* aux){
+ 	*aux.cargar_por_teclado();
+    diccionario->insert(clave,aux);	
+ }
+ 
+void Menu::baja(string clave){
+	bool encontrado;
+	busca(clave, encontrado);
+	if(encontrado){
+		diccionario->remove(clave);
+	}
+    cout<<"\n fue dado de baja"
+    	
+}
+
+bool Menu::busca(string clave, bool *estado){
+	for (unsigned int i = 0; i < clave.length(); i++){
+                clave[i] = toupper(clave[i]);
+            }
+            if (diccionario->search(clave)){
+                cout << "\n\t---------------------- Busqueda ------------------------------\n";
+                BSTNode<string>* aeropuerto = diccionario->search(diccionario->get_root(),clave);
+                *aeropuerto->get_valor()->mostrar_aeropuerto();
+                cout << "\n\t--------------------------------------------------------------\n";
+                estado=true;
+            }
+            else {
+                cout << "El codigo invalido" <<endl;
+				estado=false;
+            }
+            
+    	
 }
