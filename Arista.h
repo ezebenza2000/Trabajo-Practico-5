@@ -1,11 +1,13 @@
 #ifndef ARISTA_H_INCLUDED
 #define ARISTA_H_INCLUDED
-#include <iostream>
+#include "Vertice.h"
 #include "Vuelo.h"
+#include <iostream>
+
 
 using namespace std;
 
-class Vertice{};
+class Vertice;
 
 class Arista{
   private:

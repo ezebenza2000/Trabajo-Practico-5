@@ -2,6 +2,7 @@
 #define VERTICE_H_INCLUDED
 #include <iostream>
 #include "Arista.h"
+
 using namespace std;
 
 

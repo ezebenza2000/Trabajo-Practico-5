@@ -1,5 +1,6 @@
 #include "Grafo.h"
 
+
 Grafo::Grafo(){
     h = NULL;
 }
@@ -114,7 +115,7 @@ void Grafo::eliminarArista(Vertice *origen, Vertice *destino){
     actual = origen->get_adyacente();
 
 
-    if(actual == NULL;){
+    if(actual == NULL){
         cout<<"El vertice origen no tiene aristas"<<endl;
     }
     else if (actual->get_adyacente() == destino){
@@ -130,7 +131,7 @@ void Grafo::eliminarArista(Vertice *origen, Vertice *destino){
             if (actual->get_adyacente() == destino){
                 anterior->set_sig_arista(actual->get_arista());
                 actual->set_sig_adyacente(NULL);
-                actual->set_sig_arista(NULL)
+                actual->set_sig_arista(NULL);
                 delete actual;
                 aux = 0;
             }
