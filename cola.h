@@ -30,6 +30,11 @@ public:
     // Post: se devolvió el valor del primer elemento anterior, la cola
     // contiene un elemento menos, si la cola no estaba vacía.
     BSTNode<string>* cola_desencolar();
+
+
+    // Pre: la cola fue creada.
+    // Post: Desencola todos los elementos y los muestra por pantalla
+    void mostrar();
 };
 
 #endif //COLA_H
