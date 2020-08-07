@@ -28,3 +28,11 @@ BSTNode<string> *Cola :: cola_desencolar(){
     this->prim = this->prim->prox;
     return aux;
 }
+
+void Cola :: mostrar(){
+	BSTNode<string>* aux;
+	while(!this->esta_vacia()){
+		aux=this->cola_desencolar();
+		cout>>*aux; //hay que reemplazar esto por un petodo especifico para mostrar la informacion por pantalla
+	}
+}
