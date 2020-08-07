@@ -1,8 +1,8 @@
 #ifndef GRAFO_H
 #define GRAFO_H
+
 #include <iostream>
 #include "Vertice.h"
-#include "Arista.h"
 #include "Vuelo.h"
 
 using namespace std;
@@ -21,9 +21,6 @@ class Grafo
       Vertice *h;
       void anular();
 
-      //Realiza un print grafico que muestra el grafo
-      void listaAdyacencia();
-
       //Recibe la ruta de origen y destino para saber que "VIAJE" borrar
       void eliminarArista(Vertice *origen, Vertice *destino);
 
@@ -35,7 +32,7 @@ class Grafo
 
     public:
         //Constructor
-        Grafo::Grafo();
+        Grafo();
 
         //Destructor
         ~Grafo();
@@ -47,24 +44,27 @@ class Grafo
         //POST: Devuelve la cantidad de vertices;
         int tam();
 
+        //Realiza un print grafico que muestra el grafo
+        void listaAdyacencia();
+
         //PRE: Recibe un string
         //POST: Devuelve el vertice con el nombre de ese string
         Vertice *getVertice(string nombre);
 
         //PRE: Grafo ya inicializado
         //POST: Agrega un vertice al final de la lista de vertices
-        void insertaVertice(string nombre);
+        void inserta_vertice(string nombre);
 
         //PRE:Recibe el nombre del vertice origen, el del destino, el precio y el tiempo
         //POST: Crea una arista adyacente al vertice origen con los datos;
-        void insertaArista(string origen, string destino, int precio, int tiempo)
+        void inserta_arista(string origen, string destino, int precio, int tiempo);
 
         //PRE: Recibe el nombre del vertice origen y del destino
         //para saber que arista es
         //POST: De existir una arista con cierto camino se borra.
-        void eliminarArista(string origen, string destino);
+        void eliminar_arista(string origen, string destino);
 
-        void eliminarVertice(string vertice);
+        void eliminar_vertice(string vertice);
 };
 
 

@@ -19,7 +19,7 @@ int Grafo::tam(){
         contador++;
         aux = aux->get_sig_vertice();
     }
-    return cont;
+    return contador;
 }
 
 Vertice *Grafo::getVertice(string nombre){
@@ -34,8 +34,8 @@ Vertice *Grafo::getVertice(string nombre){
     return NULL;
 }
 
-void Grafo::insertaVertice(string nombre){
-    Vertice *nuevo = new Vertice;
+void Grafo::inserta_vertice(string nombre){
+    Vertice *nuevo = new Vertice(nombre);
     nuevo->set_nombre(nombre);
     nuevo->set_sig_vertice(NULL);
     nuevo->set_adyacente(NULL);
@@ -79,8 +79,8 @@ void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, int tie
 }
 
 
-void Grafo::insertaArista(string origen, string destino, int precio, int tiempo){
-    insertaArista(getVertice(origen), getVertice(destino), precio, tiempo, origen)
+void Grafo::inserta_arista(string origen, string destino, int precio, int tiempo){
+    insertaArista(getVertice(origen), getVertice(destino), precio, tiempo, origen);
 }
 
 void Grafo::listaAdyacencia(){
@@ -88,13 +88,13 @@ void Grafo::listaAdyacencia(){
     Arista *arisAux;
     vertAux = h;
     while(vertAux != NULL){
-        cout<<vertAux->nombre<<"->";
-        arisAux = vertAux->ady;
+        cout<<vertAux->get_nombre()<<"->";
+        arisAux = vertAux->get_adyacente();
         while(arisAux != NULL){
-            cout<<arisAux->ady->nombre<<"->";
-            arisAux = arisAux->sig;
+            cout<<arisAux->get_adyacente()->get_nombre()<<"->";
+            arisAux = arisAux->get_arista();
         }
-        vertAux = vertAux-sig;
+        vertAux = vertAux->get_sig_vertice();
         cout<<endl;
     }
 }
@@ -104,12 +104,12 @@ void Grafo::anular(){
 
     while(h != NULL){
         aux = h;
-        h = h->sig;
+        h = h->get_sig_vertice();
         delete aux;
     }
 }
 
-void Grafo::eliminarArista(Vertice *origen; Vertice *destino){
+void Grafo::eliminarArista(Vertice *origen, Vertice *destino){
     Arista *actual, *anterior;
     actual = origen->get_adyacente();
 
@@ -141,7 +141,7 @@ void Grafo::eliminarArista(Vertice *origen; Vertice *destino){
     }
 }
 
-void Grafo::eliminarArista(string origen, string destino){
+void Grafo::eliminar_arista(string origen, string destino){
     eliminarArista(getVertice(origen),getVertice(destino));
 }
 
@@ -181,7 +181,7 @@ void Grafo::eliminarVertice(Vertice *vert){
     }
 }
 
-void Grafo::eliminarVertice(string vertice){
+void Grafo::eliminar_vertice(string vertice){
     eliminarVertice(getVertice(vertice));
 }
 

@@ -1,11 +1,15 @@
 #ifndef VERTICE_H_INCLUDED
 #define VERTICE_H_INCLUDED
+#include <iostream>
+#include "Arista.h"
+using namespace std;
 
-class Vertice
-{
+
+
+class Vertice{
   private:
     Vertice *sig; //sig representa el vertice que le sigue en la lista.
-    Arista*ady;  //ady reprenseta su primer arista adyacente.
+    Arista *ady;  //ady reprenseta su primer arista adyacente.
     string nombre;
   public:
     Vertice (string nombre);

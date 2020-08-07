@@ -1,10 +1,13 @@
 #ifndef ARISTA_H_INCLUDED
 #define ARISTA_H_INCLUDED
+#include <iostream>
 #include "Vuelo.h"
 
+using namespace std;
 
-class Arista
-{
+class Vertice{};
+
+class Arista{
   private:
     Arista *sig; //sig representa la siguiente arista.
     Vertice *ady; //ady representa el vertice al que apunta.
