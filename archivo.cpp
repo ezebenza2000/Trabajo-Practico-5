@@ -1,5 +1,7 @@
 
 #include"archivo.h"
+#include "Grafo.h"
+#include "Vertice.h"
 
 Archivos::Archivos(){
     abierto = false;
@@ -101,5 +103,41 @@ void Archivos :: cargar_aeropuerto(string datos, Aeropuertos* aeropuerto){
     			}
     		}
     	}
+    }
+}
+
+void Archivos :: cargar_vuelo(string datos, Grafo* grafo_vuelos){
+    int numeroDeDato = 0;
+    int marcaIndice = 0;
+    string aux1String;
+    string aux2String;
+    int auxTiempo;
+    int auxPrecio;
+    for(unsigned int i = 0; i<= datos.length(); i++){
+        if(datos[i] == ' ' || i == datos.length()){
+            string elemento = datos.substr(marcaIndice,i-marcaIndice);
+            numeroDeDato++;
+            marcaIndice = i+1;
+            int auxEntero;
+            stringstream ss(elemento);
+            ss >> auxEntero;
+            switch(numeroDeDato){
+                case 1:{
+                    aux1String = elemento;
+                }
+                case 2:{
+                    if(!(grafo_vuelos->getVertice(aux1String))) grafo_vuelos->inserta_vertice(aux1String);
+                    if(!(grafo_vuelos->getVertice(elemento))) grafo_vuelos->inserta_vertice(elemento);
+                    aux2String = elemento;
+                }
+                case 3:{
+                    auxTiempo = auxEntero;
+                }
+                case 4:{
+                    auxPrecio = auxEntero;
+                    grafo_vuelos->inserta_arista(aux1String,aux2String,auxPrecio,auxTiempo);
+                }
+            }
+        }
     }
 }

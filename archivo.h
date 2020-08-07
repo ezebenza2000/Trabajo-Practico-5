@@ -11,6 +11,7 @@
 #include<fstream>
 #include<sstream>
 #include "aeropuertos.h"
+#include "Grafo.h"
 
 using namespace std;
 
@@ -58,6 +59,10 @@ class Archivos
         //PRE: Archivo de lectura y puntero a la lista de peliculas que se va a cargar.
      	//POST: Lista cargada.
      	void cargar_aeropuerto(string Datos, Aeropuertos* aeropuerto);
+
+        //PRE: Archivo de lectura y puntero a la lista de peliculas que se va a cargar.
+        //POST: Lista cargada.
+        void cargar_vuelo(string Datos, Grafo* grafo_vuelos);
 
     private:
         /*Atributos*/

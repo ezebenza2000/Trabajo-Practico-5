@@ -5,6 +5,10 @@ Grafo::Grafo(){
     h = NULL;
 }
 
+Grafo::~Grafo(){
+    
+}
+
 bool Grafo::vacio(){
     if (h == NULL){
         return true;
