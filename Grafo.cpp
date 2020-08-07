@@ -1,6 +1,6 @@
 #include "Grafo.h"
 
-void Grafo::inicializa(){
+Grafo::Grafo(){
     h = NULL;
 }
 
@@ -11,34 +11,34 @@ bool Grafo::vacio(){
     return false;
 }
 
-int Grafo::tamanio(){
+int Grafo::tam(){
     int contador = 0;
     Vertice *aux;
     aux = h;
     while(aux != NULL){
         contador++;
-        aux = aux->sig;
+        aux = aux->get_sig_vertice();
     }
-    return contador;
+    return cont;
 }
 
 Vertice *Grafo::getVertice(string nombre){
     Vertice *aux;
     aux = h;
     while ( aux != NULL ){
-        if (aux->nombre == nombre){
+        if (aux->get_nombre() == nombre){
             return aux;
         }
-        aux = aux->sig;
+        aux = aux->get_sig_vertice();
     }
     return NULL;
 }
 
 void Grafo::insertaVertice(string nombre){
     Vertice *nuevo = new Vertice;
-    nuevo->nombre = nombre;
-    nuevo->sig = NULL;
-    nuevo->ady = NULL;
+    nuevo->set_nombre(nombre);
+    nuevo->set_sig_vertice(NULL);
+    nuevo->set_adyacente(NULL);
 
     if (vacio()){
         h = nuevo;
@@ -46,32 +46,41 @@ void Grafo::insertaVertice(string nombre){
     else{
         Vertice *aux;
         aux = h;
-        while(aux->sig != NULL){
-            aux = aux->sig;
+        while(aux->get_sig_vertice() != NULL){
+            aux = aux->get_sig_vertice();
         }
-        aux->sig = nuevo;
+        aux->set_sig_vertice(nuevo);
     }
 }
 
-void Grafo::insertaArista(Vertice *origen, Vertice *destino, int valor){
-    Arista *nueva = new Arista;
-    nueva->valor = valor;
-    nueva->sig = NULL;
-    nueva->ady = NULL;
+void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV){
+    Arista *nueva ;
+    Vuelo *nuevo;
+    nuevo->set_precio(precio);
+    nuevo->set_tiempo(tiempo);
+    nueva = new Arista(nuevo);
+    nueva->set_origen(origenV);
+    nueva->set_sig_adyacente(NULL);
+    nueva->set_sig_arista(NULL);
 
     Arista *aux;
-    aux = origen->ady;
+    aux = origen->get_adyacente();
     if (aux == NULL){
-        origen->ady = nueva;
-        nueva->ady = destino;
+        origen->set_adyacente(nueva);
+        nueva->set_sig_adyacente(destino);
     }
     else{
-        while ( aux->sig != NULL){
-            aux = aux->sig;
+        while ( aux->get_arista() != NULL){
+            aux = aux->get_arista();
         }
-        aux->sig = nueva;
-        nueva->ady = destino;
+        aux->set_sig_arista(nueva);
+        nueva->set_sig_adyacente(destino);
     }
+}
+
+
+void Grafo::insertaArista(string origen, string destino, int precio, int tiempo){
+    insertaArista(getVertice(origen), getVertice(destino), precio, tiempo, origen)
 }
 
 void Grafo::listaAdyacencia(){
@@ -85,7 +94,7 @@ void Grafo::listaAdyacencia(){
             cout<<arisAux->ady->nombre<<"->";
             arisAux = arisAux->sig;
         }
-        vertAux = vertAux->sig;
+        vertAux = vertAux-sig;
         cout<<endl;
     }
 }
@@ -100,36 +109,40 @@ void Grafo::anular(){
     }
 }
 
-void Grafo::eliminarArista(Vertice *origen, Vertice *destino){
+void Grafo::eliminarArista(Vertice *origen; Vertice *destino){
     Arista *actual, *anterior;
-    actual = origen->ady;
+    actual = origen->get_adyacente();
 
 
-    if(actual == NULL){
+    if(actual == NULL;){
         cout<<"El vertice origen no tiene aristas"<<endl;
     }
-    else if (actual->ady == destino){
-        origen->ady = actual->sig;
+    else if (actual->get_adyacente() == destino){
+        origen->set_adyacente(actual->get_arista());
+        actual->set_sig_adyacente(NULL);
         delete actual;
     }
     else{
         int aux = 1;
         while(actual != NULL && aux == 1 ){
-            if (actual->ady ==destino){
-                anterior->sig = actual->sig;
+            anterior = actual;
+            actual = actual->get_arista();
+            if (actual->get_adyacente() == destino){
+                anterior->set_sig_arista(actual->get_arista());
+                actual->set_sig_adyacente(NULL);
+                actual->set_sig_arista(NULL)
                 delete actual;
                 aux = 0;
-            }
-            else {
-                anterior = actual;
-                actual = actual->sig;
             }
         }
         if (aux == 1){
             cout << "Esos dos vertices no estan conectados" << endl;
         }
-
     }
+}
+
+void Grafo::eliminarArista(string origen, string destino){
+    eliminarArista(getVertice(origen),getVertice(destino));
 }
 
 void Grafo::eliminarVertice(Vertice *vert){
@@ -140,30 +153,36 @@ void Grafo::eliminarVertice(Vertice *vert){
 
     while(actual != NULL ){
 
-        aux = actual->ady;
+        aux = actual->get_adyacente();
         int i = 0;
         while(aux != NULL && i == 0){
-            if(aux->ady == vert){
-                eliminarArista(actual, aux->ady);
+            if(aux->get_adyacente() == vert){
+                eliminarArista(actual, aux->get_adyacente());
                 i++;
             }
-            aux = aux->sig;
+            aux = aux->get_arista();
         }
-        actual = actual->sig;
+        actual = actual->get_sig_vertice();
     }
     actual = h;
     if (h == vert){
-        h = h->sig;
+        h = h->get_sig_vertice();
+        actual->set_adyacente(NULL);
+        actual->set_sig_vertice(NULL);
         delete actual;
     }
     else{
         while(actual != vert){
             anterior = actual;
-            actual = actual->sig;
+            actual = actual->get_sig_vertice();
         }
-        anterior->sig = actual->sig;
+        anterior->set_sig_vertice(actual->get_sig_vertice());
         delete actual;
     }
+}
+
+void Grafo::eliminarVertice(string vertice){
+    eliminarVertice(getVertice(vertice));
 }
 
 

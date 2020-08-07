@@ -1,6 +1,9 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 #include <iostream>
+#include "Vertice.h"
+#include "Arista.h"
+#include "Vuelo.h"
 
 using namespace std;
 
@@ -8,44 +11,60 @@ using namespace std;
 Este tipo de grafo va a tener una lista de vertices
 que cada uno tiene una lista de aristas, por lo tanto
 grafo va a tener un puntero de tipo vertice y otro
-de tipo arista
+de tipo arista. Ademas cada arista tiene un puntero a la siguiente arista
+y otro al vertice destino que apunta.
  */
-
-class Vertice;
-
-class Arista
-{
-    Arista *sig;
-    Vertice *ady;
-    int valor;
-    friend class Grafo;
-};
-
-
-class Vertice
-{
-    Vertice *sig;
-    Arista* ady;
-    string nombre;
-    friend class Grafo;
-};
-
-
 
 class Grafo
 {
-    Vertice *h;
+    private:
+      Vertice *h;
+      void anular();
+
+      //Realiza un print grafico que muestra el grafo
+      void listaAdyacencia();
+
+      //Recibe la ruta de origen y destino para saber que "VIAJE" borrar
+      void eliminarArista(Vertice *origen, Vertice *destino);
+
+      //Recibe la direccion del vertice que quiere borrar
+      void eliminarVertice(Vertice *vert);
+
+      //Con la direccion de memoria y los valores recibido crea una nueva arista
+      void insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV);
+
     public:
-        void inicializa();
-        bool vacio();//pregunta si esta vacio
-        int tamanio();//Devuele el tamanio
-        Vertice *getVertice(string nombre);//Regresa la direccion del vertice
-        void insertaArista(Vertice *origen, Vertice *destino, int valor);//
+        //Constructor
+        Grafo::Grafo();
+
+        //Destructor
+        ~Grafo();
+
+        //pregunta si esta vacio
+        bool vacio();
+
+        //PRE:objeto creado;
+        //POST: Devuelve la cantidad de vertices;
+        int tam();
+
+        //PRE: Recibe un string
+        //POST: Devuelve el vertice con el nombre de ese string
+        Vertice *getVertice(string nombre);
+
+        //PRE: Grafo ya inicializado
+        //POST: Agrega un vertice al final de la lista de vertices
         void insertaVertice(string nombre);
-        void listaAdyacencia();
-        void eliminarArista(Vertice *origen, Vertice *destino);
-        void anular();
-        void eliminarVertice(Vertice *vert);
+
+        //PRE:Recibe el nombre del vertice origen, el del destino, el precio y el tiempo
+        //POST: Crea una arista adyacente al vertice origen con los datos;
+        void insertaArista(string origen, string destino, int precio, int tiempo)
+
+        //PRE: Recibe el nombre del vertice origen y del destino
+        //para saber que arista es
+        //POST: De existir una arista con cierto camino se borra.
+        void eliminarArista(string origen, string destino);
+
+        void eliminarVertice(string vertice);
 };
 
 
