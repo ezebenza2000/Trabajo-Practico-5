@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "Vertice.h"
+#include "Costos.h"
+#include "VerticeVertice"
 
 
 using namespace std;
@@ -29,6 +31,8 @@ class Grafo
 
       //Con la direccion de memoria y los valores recibido crea una nueva arista
       void insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV);
+
+      void camino_minimo(Vertice *origen, Vertice *destino);
 
     public:
         //Constructor
@@ -64,7 +68,14 @@ class Grafo
         //POST: De existir una arista con cierto camino se borra.
         void eliminar_arista(string origen, string destino);
 
+
+        //PRE: Recibe un string
+        //POST: Elimina el vertice con dicho nombre
         void eliminar_vertice(string vertice);
+
+        void camino_minimo(string origen, string destino);
+
+
 };
 
 

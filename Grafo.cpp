@@ -6,7 +6,7 @@ Grafo::Grafo(){
 }
 
 Grafo::~Grafo(){
-    
+
 }
 
 bool Grafo::vacio(){
@@ -188,6 +188,106 @@ void Grafo::eliminarVertice(Vertice *vert){
 
 void Grafo::eliminar_vertice(string vertice){
     eliminarVertice(getVertice(vertice));
+}
+
+void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
+    Lista<Costos> listaCostos; // listaCostos tiene nodos con un puntero a vertice y una variable de tipo entero
+    Lista<Costos> listaOrdenada;// listaOrdenada tiene nodos con un puntero a vertice y una variable de tipo entero
+    Pila<VerticeVertice> pilaVertice; //La cola guarda 2 vertices
+
+    Costo * costoAux1 = new Costo(origen, 0);
+    listaCostos.insert(costosAux1); //Inserto el primer vertice con costo cero
+    Costo * costoAux2 = new Costo(origen, 0);
+    listaOrdenada.insert(costosAux2); //Inserto el primer vertice con costo cero
+
+    int bandera, bandera2;
+    int costoActual;
+    Vertice *verticeActual, *destinoActual;
+    while (!listaOrdenada.lista_vacia()){
+        Costo * costoAux = listaOrdenada.get_dato(1);
+        verticeActual = costoAux->get_vertice(); // Tiene que igualarse al primer vertice de la lista
+        costoActual = costoAux->get_costo(); //Tiene que igualarse al costo de la posicion 1
+        listaOrdenada.del_dato(1);
+
+        if (verticeActual == destino){
+            cout<<"Costo: "<<costoActual<<endl;
+
+            bandera2 = 1;
+            destinoActual = destino;
+            while(!pilaVertice.pila_vacia()){
+                cout<<destinoActual->get_nombre()<<"<--";
+                while(!pilaVertice.pila_vacia() && pilaVertice.get_dato().get_segundo() != destinoActual;){
+                    cout << pilaVertice.get_dato() << "<--";
+                    pilaVertice.del_dato();
+                }
+                if(!pilaVertice.pila_vacia()){
+                    destinoActual = pilaVertice.get_dato().get_primero();
+                }
+
+            }
+        }
+    }
+
+    Arista *aux;
+
+    aux = verticeActual->get_adyacente();
+    while ( aux != NULL ){ //RECORRO LAS ARISTAS DEL VERTICE
+        bandera = 0;
+        costoActual = costoActual + aux->get_precio();   //le sumo el precio para calcular el costo final
+
+        for ( int i = 1; i < listaCostos.get_tam(); i++){
+            Costo * costoAux3 = listaCostos.get_dato(i);
+            if(aux->get_adyacente() == costoAux3->get_vertice()){
+
+                bandera = 1;
+                if (costoActual < costoAux3->get_costo()){//Segundo es el del costo
+
+                    costoAux3->set_costo(costoActual);
+                    for ( int j = 1; j < listaOrdenada.get_tam(); j++){
+                        Costo * costoAux6 = new listaOrdenada.get_dato(j);
+                        if (aux->get_adyacente() == costoAux6->get_vertice()){
+                            costoAux6->set_costo(costoActual);
+                        }
+                        costoAux6 = 0;
+                    }
+
+                    listaOrdenada.lista_sort();
+
+                    VerticeVertice * auxiliar = new VerticeVertice(verticeActual, aux->get_adyacente());
+                    pilaVertice.insert(auxiliar);
+                    auxiliar = 0;
+
+                    costoActual = costoActual - aux->get_precio();
+                }
+            }
+            costoAux3 = 0;
+        }
+
+        if (band == 0){
+            Costo * costoAux4 = new Costo(aux->get_adyacente(),costoActual);
+            listaCostos.insert(costoAux4);
+            Costo * costoAux5 = new Costo(aux->get_adyacente(),costoActual);
+            listaOrdenada.insert(costoAux5);
+
+            listaOrdenada.lista_sort();
+            VerticeVertice * auxiliar = new VerticeVertice(verticeActual, aux->get_adyacente());
+            pilaVertice.insert(auxiliar);
+            auxiliar = 0;
+            costoActual = costoActual - aux->get_precio();
+            costoAux4 = 0;
+            costoAux5 = 0;
+        }
+
+        aux = aux->get_arista();
+    }
+
+    if (bandera2 == 0){
+        cout << "No hay ruta entre esos dos vertices"<< endl;
+    }
+}
+
+void Grafo::camino_minimo(string origen, string destino){
+    camino_minimo(getVertice(origen),getVertice(destino));
 }
 
 
