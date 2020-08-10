@@ -191,14 +191,14 @@ void Grafo::eliminar_vertice(string vertice){
 }
 
 void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
-    Lista<Costos> listaCostos; // listaCostos tiene nodos con un puntero a vertice y una variable de tipo entero
-    Lista<Costos> listaOrdenada;// listaOrdenada tiene nodos con un puntero a vertice y una variable de tipo entero
+    Lista<Costo> listaCosto; // listaCosto tiene nodos con un puntero a vertice y una variable de tipo entero
+    Lista<Costo> listaOrdenada;// listaOrdenada tiene nodos con un puntero a vertice y una variable de tipo entero
     Pila<VerticeVertice> pilaVertice; //La cola guarda 2 vertices
 
     Costo * costoAux1 = new Costo(origen, 0);
-    listaCostos.insert(costosAux1); //Inserto el primer vertice con costo cero
+    listaCosto.insert(costoAux1); //Inserto el primer vertice con costo cero
     Costo * costoAux2 = new Costo(origen, 0);
-    listaOrdenada.insert(costosAux2); //Inserto el primer vertice con costo cero
+    listaOrdenada.insert(costoAux2); //Inserto el primer vertice con costo cero
 
     int bandera, bandera2;
     int costoActual;
@@ -216,12 +216,12 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
             destinoActual = destino;
             while(!pilaVertice.pila_vacia()){
                 cout<<destinoActual->get_nombre()<<"<--";
-                while(!pilaVertice.pila_vacia() && pilaVertice.get_dato().get_segundo() != destinoActual;){
+                while(!(pilaVertice.pila_vacia()) && ((pilaVertice.get_dato())->get_segundo() != destinoActual)){
                     cout << pilaVertice.get_dato() << "<--";
                     pilaVertice.del_dato();
                 }
                 if(!pilaVertice.pila_vacia()){
-                    destinoActual = pilaVertice.get_dato().get_primero();
+                    destinoActual = pilaVertice.get_dato()->get_primero();
                 }
 
             }
@@ -235,8 +235,8 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
         bandera = 0;
         costoActual = costoActual + aux->get_precio();   //le sumo el precio para calcular el costo final
 
-        for ( int i = 1; i < listaCostos.get_tam(); i++){
-            Costo * costoAux3 = listaCostos.get_dato(i);
+        for ( int i = 1; i < listaCosto.get_tam(); i++){
+            Costo * costoAux3 = listaCosto.get_dato(i);
             if(aux->get_adyacente() == costoAux3->get_vertice()){
 
                 bandera = 1;
@@ -244,7 +244,7 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
 
                     costoAux3->set_costo(costoActual);
                     for ( int j = 1; j < listaOrdenada.get_tam(); j++){
-                        Costo * costoAux6 = new listaOrdenada.get_dato(j);
+                        Costo* costoAux6 = new Costo();//get_dato(j);
                         if (aux->get_adyacente() == costoAux6->get_vertice()){
                             costoAux6->set_costo(costoActual);
                         }
@@ -253,7 +253,7 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
 
                     listaOrdenada.lista_sort();
 
-                    VerticeVertice * auxiliar = new VerticeVertice(verticeActual, aux->get_adyacente());
+                    VerticeVertice* auxiliar =  new VerticeVertice(verticeActual, aux->get_adyacente());
                     pilaVertice.insert(auxiliar);
                     auxiliar = 0;
 
@@ -263,14 +263,14 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
             costoAux3 = 0;
         }
 
-        if (band == 0){
+        if (bandera == 0){
             Costo * costoAux4 = new Costo(aux->get_adyacente(),costoActual);
-            listaCostos.insert(costoAux4);
+            listaCosto.insert(costoAux4);
             Costo * costoAux5 = new Costo(aux->get_adyacente(),costoActual);
             listaOrdenada.insert(costoAux5);
 
             listaOrdenada.lista_sort();
-            VerticeVertice * auxiliar = new VerticeVertice(verticeActual, aux->get_adyacente());
+            VerticeVertice* auxiliar =  new VerticeVertice(verticeActual, aux->get_adyacente());
             pilaVertice.insert(auxiliar);
             auxiliar = 0;
             costoActual = costoActual - aux->get_precio();

@@ -1,13 +1,10 @@
-/*
-Es solamente una idea lo de usar una cola. no es necesario. pero si lo hacemos de esta manera vamos a necesitar una clase
-Cola template.
-*/
 #ifndef MENUVUE_H
 #define MENUVUE_H
 
 #include "Grafo.h"
 #include "aeropuertos.h"
 #include "t_menu.h"
+#include "BST.h"
 
 using namespace std;
 
@@ -17,11 +14,9 @@ public:
     BST<string>* diccionario;
 
     char opcion;
-    Grafo Vuelos;
-    Cola ruta;
 
     //cosntructor
-    MenuVue(Grafo Vuelos);
+    MenuVue(BST<string>* Diccionario_de_Aeropuertos);
 
     //Mostrar las opciones que el usuario puede elegir
     //Pre-Condicion: -
@@ -32,14 +27,6 @@ public:
     //Pre-Condicion: -
     //Post-Condicion: Procesa la opcion invocando las funciones correspondientes
     bool selectorDeOpciones();
-
-    //Pre-Condicion: -
-    //Post-Condicion: Els usuario ingresa los datos por consola
-    void interfas(string salida, string destino);
-
-    //Pre-Condicion: -
-    //Post-Condicion: mustra la ruta cargada
-    void mostrar_ruta()
 
 
 };

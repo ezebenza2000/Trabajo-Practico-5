@@ -52,7 +52,7 @@ bool MenuVue::selectorDeOpciones() {
             
         }
         
-        case '2': {
+        case '3': {
             
             
             cout << "\n\t------->\n";

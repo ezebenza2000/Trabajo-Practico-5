@@ -4,7 +4,9 @@
 #include <iostream>
 #include "Vertice.h"
 #include "Costos.h"
-#include "VerticeVertice"
+#include "VerticeVertice.h"
+#include "Lista.h"
+#include "Pila.h"
 
 
 using namespace std;

@@ -1,4 +1,4 @@
-#include "menuVue.h"
+#include "menuAerp.h"
 #include "BST.h"
 #include "aeropuertos.h"
 #include <iostream>
@@ -20,7 +20,7 @@ void Menu::mostrarMenu(){
     cout << "\t6. Abrir el menu de Grafos\n";
     cout << "\t7. Salir\n";
     cout << "\tIngrese el numero de la opcion que desea seleccionar: ";
-    cin >> opcion;
+    cin >> this->opcion;
 }
 
 
@@ -101,7 +101,7 @@ bool Menu::selectorDeOpciones() {
     return estado;
 }
 
- void Menu::alta(string clave, Aeropuertos* aux){
+void Menu::alta(string clave, Aeropuertos* aux){
  	aux->cargar_por_teclado();
     diccionario->insert(clave,aux);	
  }

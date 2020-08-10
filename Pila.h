@@ -29,7 +29,7 @@ class Pila
 		// Agregar un elemento a la pila
 		// PRE: pila creada
 		// POST: agrega un dato (dentro de un nodo) al principio
-		void insert(Dato d);
+		void insert(Dato* d);
 
 		// Obtener el dato que está en la cima
 		// PRE: - pila creada y no vacía
@@ -43,12 +43,12 @@ class Pila
 };
 
 template < typename Dato >
-Pila<Dato>::Pila(){
+Pila<Dato>:: Pila(){
 	primero = 0;
 }
 
 template < typename Dato >
-Pila<Dato>::~Pila(){
+Pila<Dato>:: ~Pila(){
 	while (!(this->pila_vacia())){
 		this->del_dato();
 	}
@@ -60,7 +60,7 @@ bool Pila<Dato>::pila_vacia(){
 }
 
 template < typename Dato >
-void Pila<Dato>::insert(Dato d)
+void Pila<Dato>::insert(Dato* d)
 {
 	Nodo<Dato>* pnodo = new Nodo<Dato>(d);
 	pnodo->set_siguiente(primero);

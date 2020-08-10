@@ -3,11 +3,11 @@
 
 #include "BST.h"
 #include "aeropuertos.h"
-#include "t_menu.h"
+//#include "t_menu.h"
 
 using namespace std;
 
-class Menu: private t_menu{
+class Menu /*private t_menu*/{
 
 public:
     BST<string>* diccionario;

@@ -2,7 +2,7 @@
 #define LISTA_H
 
 # include <iostream>
-# include "Nodo.h"
+# include "Pila.h"
 
 template < typename Dato >
 class Lista
