@@ -60,9 +60,7 @@ void Grafo::inserta_vertice(string nombre){
 
 void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV){
     Arista *nueva ;
-    Vuelo *nuevo;
-    nuevo->set_precio(precio);
-    nuevo->set_tiempo(tiempo);
+    Vuelo* nuevo = new Vuelo(precio,tiempo);
     nueva = new Arista(nuevo);
     nueva->set_origen(origenV);
     nueva->set_sig_adyacente(NULL);

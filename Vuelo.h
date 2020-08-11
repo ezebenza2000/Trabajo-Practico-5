@@ -8,6 +8,7 @@ class Vuelo{
 
     public:
         Vuelo(int precio, int tiempo);
+        Vuelo();
         void set_precio(int precio);
         int get_precio();
         void set_tiempo(int tiempo);

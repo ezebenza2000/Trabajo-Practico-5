@@ -1,13 +1,12 @@
-#include "menu.h"
+#include "menuAerp.h"
 #include "BST.h"
 #include "aeropuertos.h"
 #include <iostream>
 #include <string>
 #include <ctype.h>
 
-Menu :: Menu(BST<string>* Diccionario_de_Aeropuertos,Grafo* grafoVuelos){
+Menu :: Menu(BST<string>* Diccionario_de_Aeropuertos){
     this->diccionario = Diccionario_de_Aeropuertos;
-    this->grafoVuelos = grafoVuelos;
     this->opcion = 0;
 }
 
@@ -21,7 +20,7 @@ void Menu::mostrarMenu(){
     cout << "\t6. Abrir el menu de Grafos\n";
     cout << "\t7. Salir\n";
     cout << "\tIngrese el numero de la opcion que desea seleccionar: ";
-    cin >> opcion;
+    cin >> this->opcion;
 }
 
 
@@ -85,11 +84,7 @@ bool Menu::selectorDeOpciones() {
         }
         
         case '6': {
-            int opcion_grafo;
-            cout << "\n1. Consultar por menor costo";
-            cout << "\n2. Consultar por menor duracion";
-            cin >> opcion_grafo;
-            trabaja_grafo(opcion_grafo);
+        	
             break;
         }
 
@@ -106,7 +101,7 @@ bool Menu::selectorDeOpciones() {
     return estado;
 }
 
- void Menu::alta(string clave, Aeropuertos* aux){
+void Menu::alta(string clave, Aeropuertos* aux){
  	aux->cargar_por_teclado();
     diccionario->insert(clave,aux);	
  }
@@ -136,21 +131,4 @@ bool Menu::busca(string clave, bool estado){
         estado=false;
     }
      return estado;       
-}
-
-void Menu :: trabaja_grafo(int opcion_grafo){
-    string salida,destino;
-    cout << "Ingrese el aeropuerto de origen: " << endl;
-    cin >> salida;
-    cout << "Ingrese el aeropuerto de destino: " << endl;
-    cin >> destino;
-        if(opcion_grafo == 1){
-            grafoVuelos->camino_minimo(salida,destino); //costo
-        }
-        else if(opcion_grafo == 2){
-            grafoVuelos->camino_minimo(salida,destino); //duracion
-        }
-        else{
-            cout << "\nopcion invalida\n";
-        }
 }

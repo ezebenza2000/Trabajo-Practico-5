@@ -79,27 +79,34 @@ void Archivos :: cargar_aeropuerto(string datos, Aeropuertos* aeropuerto){
     		switch(numeroDeDato){
     			case 1:{
     				aeropuerto->set_clave(elemento);
+                    break;
     			}
     			case 2:{
     				aeropuerto->set_nombre(elemento);
+                    break;
     			}
     			case 3:{
     				aeropuerto->set_ciudad(elemento);
+                    break;
     			}
     			case 4:{
     				double aux;
     				stringstream ss(elemento);
     				ss >> aux;
     				aeropuerto->set_superficie(aux);
+                    break;
     			}
     			case 5:{
     				aeropuerto->set_cantidad_terminales(auxEntero);
+                    break;
     			}
     			case 6:{
     				aeropuerto->set_destinos_nacionales(auxEntero);
+                    break;
     			}
     			case 7:{
     				aeropuerto->set_destinos_internacionales(auxEntero);
+                    break;
     			}
     		}
     	}
@@ -124,18 +131,22 @@ void Archivos :: cargar_vuelo(string datos, Grafo* grafo_vuelos){
             switch(numeroDeDato){
                 case 1:{
                     aux1String = elemento;
+                    break;
                 }
                 case 2:{
                     if(!(grafo_vuelos->getVertice(aux1String))) grafo_vuelos->inserta_vertice(aux1String);
                     if(!(grafo_vuelos->getVertice(elemento))) grafo_vuelos->inserta_vertice(elemento);
                     aux2String = elemento;
+                    break;
                 }
                 case 3:{
                     auxTiempo = auxEntero;
+                    break;
                 }
                 case 4:{
                     auxPrecio = auxEntero;
                     grafo_vuelos->inserta_arista(aux1String,aux2String,auxPrecio,auxTiempo);
+                    break;
                 }
             }
         }

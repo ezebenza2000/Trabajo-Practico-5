@@ -34,7 +34,7 @@ int main(){
             archivoDeVuelos.cargar_vuelo(datos,grafoVuelos);
         }
 	}
-	Menu menu(diccionarioAeropuertos);
+	Menu menu(diccionarioAeropuertos,grafoVuelos);
 	while(menu.opcion != '7'){
 		menu.mostrarMenu();
 		menu.selectorDeOpciones();

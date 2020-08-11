@@ -5,6 +5,11 @@ Vuelo :: Vuelo(int precio, int tiempo){
     this->tiempo = tiempo;
 }
 
+Vuelo :: Vuelo(){
+	this->precio = 0;
+	this->tiempo = 0;
+}
+
 void Vuelo :: set_precio(int precio){
     this->precio = precio;
 }

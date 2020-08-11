@@ -3,19 +3,21 @@
 
 #include "BST.h"
 #include "aeropuertos.h"
-//#include "t_menu.h"
+#include "Grafo.h"
 
 using namespace std;
 
-class Menu /*private t_menu*/{
+class Menu {
 
 public:
     BST<string>* diccionario;
 
+    Grafo* grafoVuelos;
+
     char opcion;
 
     //cosntructor
-    Menu(BST<string>* Diccionario_de_Aeropuertos);
+    Menu(BST<string>* Diccionario_de_Aeropuertos,Grafo* grafoVuelos);
 
     //Mostrar las opciones que el usuario puede elegir
     //Pre-Condicion: -
@@ -41,5 +43,7 @@ private:
     //Pre:
     //Post: Busca un aeropueto por clave y lo muestra por pantalla
     bool busca(string clave, bool estado);
+
+    void trabaja_grafo(int opcion_grafo);
 };
 #endif //MENU_H
