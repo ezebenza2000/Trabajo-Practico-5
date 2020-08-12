@@ -1,6 +1,6 @@
 #include "Vuelo.h"
 
-Vuelo :: Vuelo(int precio, int tiempo){
+Vuelo :: Vuelo(int precio, float tiempo){
     this->precio = precio;
     this->tiempo = tiempo;
 }
@@ -18,10 +18,10 @@ int Vuelo :: get_precio(){
     return this->precio;
 }
 
-void Vuelo :: set_tiempo(int tiempo){
+void Vuelo :: set_tiempo(float tiempo){
     this->tiempo = tiempo;
 }
 
-int Vuelo :: get_tiempo(){
+float Vuelo :: get_tiempo(){
     return this->tiempo;
 }

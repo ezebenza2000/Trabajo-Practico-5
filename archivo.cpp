@@ -118,7 +118,7 @@ void Archivos :: cargar_vuelo(string datos, Grafo* grafo_vuelos){
     int marcaIndice = 0;
     string aux1String;
     string aux2String;
-    int auxTiempo;
+    float auxTiempo;
     int auxPrecio;
     for(unsigned int i = 0; i<= datos.length(); i++){
         if(datos[i] == ' ' || i == datos.length()){
@@ -140,11 +140,11 @@ void Archivos :: cargar_vuelo(string datos, Grafo* grafo_vuelos){
                     break;
                 }
                 case 3:{
-                    auxTiempo = auxEntero;
+                    auxPrecio = auxEntero;
                     break;
                 }
                 case 4:{
-                    auxPrecio = auxEntero;
+                    auxTiempo = auxEntero;
                     grafo_vuelos->inserta_arista(aux1String,aux2String,auxPrecio,auxTiempo);
                     break;
                 }

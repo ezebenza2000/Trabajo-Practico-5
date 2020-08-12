@@ -77,7 +77,7 @@ void Grafo::inserta_vertice(string nombre){
     }
 }
 
-void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV){
+void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, float tiempo, string origenV){
     Arista *nueva ;
     Vuelo* nuevo = new Vuelo(precio,tiempo);
     nueva = new Arista(nuevo);
@@ -101,7 +101,7 @@ void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, int tie
 }
 
 
-void Grafo::inserta_arista(string origen, string destino, int precio, int tiempo){
+void Grafo::inserta_arista(string origen, string destino, int precio, float tiempo){
     insertaArista(getVertice(origen), getVertice(destino), precio, tiempo, origen);
 }
 

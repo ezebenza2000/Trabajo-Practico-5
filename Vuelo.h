@@ -4,14 +4,14 @@
 class Vuelo{
     private:
         int precio = 0;
-        int tiempo = 0;
+        float tiempo = 0;
 
     public:
-        Vuelo(int precio, int tiempo);
+        Vuelo(int precio, float tiempo);
         Vuelo();
         void set_precio(int precio);
         int get_precio();
-        void set_tiempo(int tiempo);
-        int get_tiempo();
+        void set_tiempo(float tiempo);
+        float get_tiempo();
 };
 #endif // VUELO_H_INCLUDED
