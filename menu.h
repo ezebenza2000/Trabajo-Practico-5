@@ -29,6 +29,11 @@ public:
     //Post-Condicion: Procesa la opcion invocando las funciones correspondientes
     bool selectorDeOpciones();
 
+
+    //PRE:Recibe un string
+    //POST: La devuelve en mayuscula
+    string aMayuscula(string mystr);
+
 private:
     //cosas que claramente no hacen a la interfas y no deberian estar en esta clase.
 

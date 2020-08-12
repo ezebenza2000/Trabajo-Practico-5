@@ -228,7 +228,7 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
             while(!pilaVertice.pila_vacia()){
                 cout<<destinoActual->get_nombre()<<"<--";
                 while(!(pilaVertice.pila_vacia()) && pilaVertice.get_dato()->get_segundo() != destinoActual){
-                    cout << pilaVertice.get_dato() << "<--";
+                    pilaVertice.get_dato();
                     pilaVertice.del_dato();
                 }
                 if(!pilaVertice.pila_vacia()){

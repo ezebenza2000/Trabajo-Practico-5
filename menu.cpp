@@ -24,6 +24,13 @@ void Menu::mostrarMenu(){
     cin >> opcion;
 }
 
+string Menu::aMayuscula(string mystr){
+	for (unsigned int i = 0; i < mystr.length(); i++){
+                mystr[i] = toupper(mystr[i]);
+    }
+    return mystr;
+}
+
 
 bool Menu::selectorDeOpciones() {
 
@@ -39,6 +46,7 @@ bool Menu::selectorDeOpciones() {
             string clave;
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
+            clave = aMayuscula(clave);
             busca(clave, estado);
             break;
         }
@@ -48,6 +56,7 @@ bool Menu::selectorDeOpciones() {
             string clave;
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
+            clave = aMayuscula(clave);
             cout << "\t-------------------- Alta -------------------------------------\n";
             alta(clave, aux);
             cout << "\n\t--------------------------------------------------------------\n";
@@ -60,6 +69,7 @@ bool Menu::selectorDeOpciones() {
 		    string clave;
             cout << "Ingrese un codigo IATA: ";
             cin >> clave;
+            clave = aMayuscula(clave);
             cout << "\t--------------------- Baja -------------------------------------\n";
             baja(clave);
             cout << "\n\t--------------------------------------------------------------\n";
@@ -88,6 +98,8 @@ bool Menu::selectorDeOpciones() {
             int opcion_grafo;
             cout << "\n1. Consultar por menor costo";
             cout << "\n2. Consultar por menor duracion";
+            cout << "\n3. Ver grafo"<< endl;
+            cout << "Eleccion: ";
             cin >> opcion_grafo;
             trabaja_grafo(opcion_grafo);
             break;
@@ -121,9 +133,6 @@ void Menu::baja(string clave){
 }
 
 bool Menu::busca(string clave, bool estado){
-	for (unsigned int i = 0; i < clave.length(); i++){
-                clave[i] = toupper(clave[i]);
-    }
     if (diccionario->search(clave)){
         cout << "\n\t---------------------- Busqueda ------------------------------\n";
         BSTNode<string>* aeropuerto = diccionario->search(diccionario->get_root(),clave);
@@ -139,21 +148,27 @@ bool Menu::busca(string clave, bool estado){
 }
 
 void Menu :: trabaja_grafo(int opcion_grafo){
-    string salida,destino;
-    cout << "Ingrese el aeropuerto de origen: " << endl;
-    cin >> salida;
-    cout << "Ingrese el aeropuerto de destino: " << endl;
-    cin >> destino;
+
+
+    if (1 <= opcion_grafo && opcion_grafo <= 2){
+        string salida,destino;
+        cout << "Ingrese el aeropuerto de origen: " << endl;
+        cin >> salida;
+        cout << "Ingrese el aeropuerto de destino: " << endl;
+        cin >> destino;
+        salida = aMayuscula(salida);
+        destino = aMayuscula(destino);
         if(opcion_grafo == 1){
             grafoVuelos->camino_minimo(salida,destino); //costo
         }
         else if(opcion_grafo == 2){
             grafoVuelos->camino_minimo(salida,destino); //duracion
         }
-        else if (opcion_grafo == 3){
-            grafoVuelos->listaAdyacencia();
-        }
-        else{
-            cout << "\nopcion invalida\n";
-        }
+    }
+    else if (opcion_grafo == 3){
+        grafoVuelos->listaAdyacencia();
+    }
+    else{
+        cout << "\nopcion invalida\n";
+    }
 }
