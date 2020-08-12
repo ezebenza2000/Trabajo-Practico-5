@@ -40,3 +40,7 @@ float Arista::get_precio(){
 float Arista::get_tiempo(){
     return this->viaje->get_tiempo();
 }
+
+Vuelo* Arista::get_vuelo(){
+    return this->viaje;
+}

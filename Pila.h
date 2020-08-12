@@ -78,6 +78,7 @@ void Pila<Dato>::del_dato(){
 	Nodo<Dato>* paux = primero;
 
 	primero = paux->get_siguiente();
+	delete paux->get_dato();
 	delete paux;
 }
 

@@ -27,6 +27,7 @@ class Arista{
     string get_origen();
     float get_precio();
     float get_tiempo();
+    Vuelo* get_vuelo();
 
 };
 

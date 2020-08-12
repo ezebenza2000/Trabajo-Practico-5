@@ -18,9 +18,8 @@ void Grafo::anular(){
         while(h->get_adyacente() != NULL){
             aAux = h->get_adyacente();
             h->set_adyacente(aAux->get_arista());
-            aAux->set_origen(NULL);
-            aAux->set_sig_adyacente(NULL);
-            aAux->set_sig_arista(NULL);
+            delete aAux->get_vuelo();
+            delete aAux;
         }
         h = h->get_sig_vertice();
         delete vAux;
