@@ -6,8 +6,27 @@ Grafo::Grafo(){
 }
 
 Grafo::~Grafo(){
-
+    anular();
 }
+
+
+void Grafo::anular(){
+    Vertice *vAux;
+    Arista *aAux;
+    while(h != NULL){
+        vAux = h;
+        while(h->get_adyacente() != NULL){
+            aAux = h->get_adyacente();
+            h->set_adyacente(aAux->get_arista());
+            aAux->set_origen(NULL);
+            aAux->set_sig_adyacente(NULL);
+            aAux->set_sig_arista(NULL);
+        }
+        h = h->get_sig_vertice();
+        delete vAux;
+    }
+}
+
 
 bool Grafo::vacio(){
     if (h == NULL){
@@ -102,15 +121,7 @@ void Grafo::listaAdyacencia(){
     }
 }
 
-void Grafo::anular(){
-    Vertice *aux;
 
-    while(h != NULL){
-        aux = h;
-        h = h->get_sig_vertice();
-        delete aux;
-    }
-}
 
 void Grafo::eliminarArista(Vertice *origen, Vertice *destino){
     Arista *actual, *anterior;
@@ -190,21 +201,23 @@ void Grafo::eliminar_vertice(string vertice){
 
 void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
     Lista<Costo> listaCosto; // listaCosto tiene nodos con un puntero a vertice y una variable de tipo entero
-    Lista<Costo> listaOrdenada;// listaOrdenada tiene nodos con un puntero a vertice y una variable de tipo entero
+    Lista<Costo> listaOrdenada;// listaOrdenada tiene nodos ordenados con un puntero a vertice y una variable de tipo entero
     Pila<VerticeVertice> pilaVertice; //La cola guarda 2 vertices
 
-    Costo * costoAux1 = new Costo(origen, 0);
-    listaCosto.insert(costoAux1); //Inserto el primer vertice con costo cero
-    Costo * costoAux2 = new Costo(origen, 0);
-    listaOrdenada.insert(costoAux2); //Inserto el primer vertice con costo cero
+    VerticeVertice* aux2;
+    Costo * costoAux = new Costo(origen, 0);
+    listaCosto.insert(costoAux); //Inserto el primer vertice con costo cero
+    costoAux = new Costo(origen, 0);
+    listaOrdenada.insert(costoAux); //Inserto el primer vertice con costo cero
 
-    int bandera, bandera2;
-    int costoActual;
+    int bandera, bandera2 = 0;
+    int costoActual = 0;
     Vertice *verticeActual, *destinoActual;
+    Arista *aux;
+
     while (!listaOrdenada.lista_vacia()){
-        Costo * costoAux = listaOrdenada.get_dato(1);
-        verticeActual = costoAux->get_vertice(); // Tiene que igualarse al primer vertice de la lista
-        costoActual = costoAux->get_costo(); //Tiene que igualarse al costo de la posicion 1
+        verticeActual = listaOrdenada.get_dato(1)->get_vertice();// Tiene que igualarse al primer vertice de la lista
+        costoActual = listaOrdenada.get_dato(1)->get_costo(); //Tiene que igualarse al costo de la posicion 1
         listaOrdenada.del_dato(1);
 
         if (verticeActual == destino){
@@ -214,74 +227,78 @@ void Grafo::camino_minimo(Vertice *origen, Vertice *destino){
             destinoActual = destino;
             while(!pilaVertice.pila_vacia()){
                 cout<<destinoActual->get_nombre()<<"<--";
-                while(!(pilaVertice.pila_vacia()) && ((pilaVertice.get_dato())->get_segundo() != destinoActual)){
+                while(!(pilaVertice.pila_vacia()) && pilaVertice.get_dato()->get_segundo() != destinoActual){
                     cout << pilaVertice.get_dato() << "<--";
                     pilaVertice.del_dato();
                 }
                 if(!pilaVertice.pila_vacia()){
                     destinoActual = pilaVertice.get_dato()->get_primero();
                 }
-
             }
+            //
         }
-    }
 
-    Arista *aux;
 
-    aux = verticeActual->get_adyacente();
-    while ( aux != NULL ){ //RECORRO LAS ARISTAS DEL VERTICE
-        bandera = 0;
-        costoActual = costoActual + aux->get_precio();   //le sumo el precio para calcular el costo final
 
-        for ( int i = 1; i < listaCosto.get_tam(); i++){
-            Costo * costoAux3 = listaCosto.get_dato(i);
-            if(aux->get_adyacente() == costoAux3->get_vertice()){
+        aux = verticeActual->get_adyacente();
+        while ( aux != NULL ){ //RECORRO LAS ARISTAS DEL VERTICE
+            bandera = 0;
+            costoActual = costoActual + aux->get_precio();   //le sumo el precio para calcular el costo final
 
-                bandera = 1;
-                if (costoActual < costoAux3->get_costo()){//Segundo es el del costo
+            for ( int i = 1; i <= listaCosto.get_tam(); i++){
 
-                    costoAux3->set_costo(costoActual);
-                    for ( int j = 1; j < listaOrdenada.get_tam(); j++){
-                        Costo* costoAux6 = new Costo();//get_dato(j);
-                        if (aux->get_adyacente() == costoAux6->get_vertice()){
-                            costoAux6->set_costo(costoActual);
+                if(aux->get_adyacente() == listaCosto.get_dato(i)->get_vertice()){
+
+                    bandera = 1;
+                    if (costoActual < listaCosto.get_dato(i)->get_costo()){//Segundo es el del costo
+
+                        listaCosto.get_dato(i)->set_costo(costoActual);
+                        for ( int j = 1; j <= listaOrdenada.get_tam(); j++){
+
+                            if (aux->get_adyacente() == listaOrdenada.get_dato(i)->get_vertice()){
+                                listaOrdenada.get_dato(i)->get_costo();
+                            }
+
                         }
-                        costoAux6 = 0;
+
+                        listaOrdenada.lista_sort();
+
+                        aux2 =  new VerticeVertice(verticeActual, aux->get_adyacente());
+                        pilaVertice.insert(aux2);
+
+                        costoActual = costoActual - aux->get_precio();
                     }
-
-                    listaOrdenada.lista_sort();
-
-                    VerticeVertice* auxiliar =  new VerticeVertice(verticeActual, aux->get_adyacente());
-                    pilaVertice.insert(auxiliar);
-                    auxiliar = 0;
-
-                    costoActual = costoActual - aux->get_precio();
                 }
             }
-            costoAux3 = 0;
+
+            if (bandera == 0){
+                costoAux = new Costo(aux->get_adyacente(),costoActual);
+                listaCosto.insert(costoAux);
+                costoAux = new Costo(aux->get_adyacente(),costoActual);
+                listaOrdenada.insert(costoAux);
+
+                listaOrdenada.lista_sort();
+                aux2 =  new VerticeVertice(verticeActual, aux->get_adyacente());
+                pilaVertice.insert(aux2);
+                costoActual = costoActual - aux->get_precio();
+
+            }
+
+            aux = aux->get_arista();
         }
 
-        if (bandera == 0){
-            Costo * costoAux4 = new Costo(aux->get_adyacente(),costoActual);
-            listaCosto.insert(costoAux4);
-            Costo * costoAux5 = new Costo(aux->get_adyacente(),costoActual);
-            listaOrdenada.insert(costoAux5);
 
-            listaOrdenada.lista_sort();
-            VerticeVertice* auxiliar =  new VerticeVertice(verticeActual, aux->get_adyacente());
-            pilaVertice.insert(auxiliar);
-            auxiliar = 0;
-            costoActual = costoActual - aux->get_precio();
-            costoAux4 = 0;
-            costoAux5 = 0;
-        }
-
-        aux = aux->get_arista();
     }
+
 
     if (bandera2 == 0){
         cout << "No hay ruta entre esos dos vertices"<< endl;
     }
+    costoAux = 0;
+    aux = 0;
+    aux2 = 0;
+    verticeActual = 0;
+    destinoActual = 0;
 }
 
 void Grafo::camino_minimo(string origen, string destino){

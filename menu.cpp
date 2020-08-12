@@ -53,7 +53,7 @@ bool Menu::selectorDeOpciones() {
             cout << "\n\t--------------------------------------------------------------\n";
             estado = true;
             break;
-            
+
         }
 
         case '3': {
@@ -83,7 +83,7 @@ bool Menu::selectorDeOpciones() {
             estado = true;
             break;
         }
-        
+
         case '6': {
             int opcion_grafo;
             cout << "\n1. Consultar por menor costo";
@@ -108,9 +108,9 @@ bool Menu::selectorDeOpciones() {
 
  void Menu::alta(string clave, Aeropuertos* aux){
  	aux->cargar_por_teclado();
-    diccionario->insert(clave,aux);	
+    diccionario->insert(clave,aux);
  }
- 
+
 void Menu::baja(string clave){
 	bool encontrado = true;
 	busca(clave, encontrado);
@@ -135,7 +135,7 @@ bool Menu::busca(string clave, bool estado){
         cout << "El codigo invalido" <<endl;
         estado=false;
     }
-     return estado;       
+     return estado;
 }
 
 void Menu :: trabaja_grafo(int opcion_grafo){
@@ -149,6 +149,9 @@ void Menu :: trabaja_grafo(int opcion_grafo){
         }
         else if(opcion_grafo == 2){
             grafoVuelos->camino_minimo(salida,destino); //duracion
+        }
+        else if (opcion_grafo == 3){
+            grafoVuelos->listaAdyacencia();
         }
         else{
             cout << "\nopcion invalida\n";

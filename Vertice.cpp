@@ -4,6 +4,11 @@ Vertice::Vertice(string nombre){
     this->nombre = nombre;
 }
 
+Vertice::~Vertice(){
+    sig = 0;
+    ady = 0;
+}
+
 void Vertice::set_sig_vertice(Vertice * siguiente){
     this->sig = siguiente;
 }
@@ -26,8 +31,4 @@ void Vertice::set_nombre(string nombre){
 
 string Vertice::get_nombre(){
     return this->nombre;
-}
-
-Vertice::~Vertice(){
-
 }

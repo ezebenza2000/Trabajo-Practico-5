@@ -14,13 +14,13 @@ class Vertice{
     string nombre;
   public:
     Vertice (string nombre);
+    ~Vertice();
     void set_sig_vertice(Vertice * siguiente);
     Vertice * get_sig_vertice();
     void set_adyacente(Arista * adyacente);
     Arista * get_adyacente();
     void set_nombre(string nombre);
     string get_nombre();
-    ~Vertice();
 };
 
 #endif // VERTICE_H_INCLUDED

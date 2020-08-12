@@ -18,6 +18,7 @@ class Arista{
 
   public:
     Arista(Vuelo * viaje);
+    ~Arista();
     Arista * get_arista();
     void set_sig_arista(Arista * siguiente);
     Vertice * get_adyacente();

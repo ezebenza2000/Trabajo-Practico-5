@@ -7,9 +7,7 @@ VerticeVertice::VerticeVertice(Vertice * primero, Vertice * segundo){
 
 VerticeVertice::~VerticeVertice(){
     primero = 0;
-    delete primero;
     segundo = 0;
-    delete segundo;
 }
 
 

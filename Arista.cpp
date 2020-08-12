@@ -4,6 +4,12 @@ Arista::Arista(Vuelo * viaje){
     this->viaje = viaje;
 }
 
+Arista::~Arista(){
+    sig = 0;
+    ady = 0;
+    viaje = 0;
+}
+
 Arista * Arista::get_arista(){
     return this->sig;
 }
