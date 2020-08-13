@@ -34,6 +34,10 @@ public:
     //le cambia el valor a la clave y al valor(ver)
     void set_data(T data,Aeropuertos* valor);
 
+    void set_tdata(T data);
+
+    void borrar_valores();
+
 
     //PRE: Recibe 2 direcciones de memoria de otros nodos
     //POST: Establece un padre, y un hijo derecho
@@ -90,12 +94,21 @@ BSTNode<T>::BSTNode(T data, Aeropuertos* valor)
     this->parent = NULL;
 }
 
+
+
 template <class T>
 T BSTNode<T>::get_data()
 {
     return this->data;
 }
 
+template <class T>
+void BSTNode<T>::borrar_valores(){
+    parent = NULL;
+    right = NULL;
+    left = NULL;
+    valor = NULL;
+}
 
 template <class T>
 Aeropuertos* BSTNode<T>::get_valor()
@@ -103,6 +116,10 @@ Aeropuertos* BSTNode<T>::get_valor()
     return this->valor;
 }
 
+template <class T>
+void BSTNode<T>::set_tdata(T data){
+    this->data = data;
+}
 
 template <class T>
 void BSTNode<T>::set_right(BSTNode<T>* right, BSTNode<T>* parent){

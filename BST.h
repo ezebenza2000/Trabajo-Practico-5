@@ -136,11 +136,15 @@ void BST<T>::print_in_order(BSTNode<T>* node)
 {
     if (node != NULL)
     {
-        print_in_order(node->get_left());
-        std::cout<< "\n\nClave = " << node->get_data()<<endl;
-        node->get_valor()->mostrar_aeropuerto();
-        //std::cout<< node->get_valor()->mostrar_aeropuerto()<<endl;
-        print_in_order(node->get_right());
+            print_in_order(node->get_left());
+            if (node->get_data() != "NO"){
+                std::cout<< "\n\nClave = " << node->get_data()<<endl;
+                std::cout << "la clave es :_"<<node->get_data()<<"_"<<endl;
+                node->get_valor()->mostrar_aeropuerto();
+                //std::cout<< node->get_valor()->mostrar_aeropuerto()<<endl;
+            }
+
+            print_in_order(node->get_right());
     }
 }
 
@@ -269,7 +273,7 @@ T BST<T>::successor(T data)
     // Return the key. If the key is not found or successor is not found, return -1
     //if(data_node == NULL)
     //    return '-1';
-    //else 
+    //else
     return successor(data_node);
 }
 
@@ -313,9 +317,17 @@ BSTNode<T> * BST<T>::remove(BSTNode<T>* node, T data)
 
     if (node->get_data() == data)
     {
+
         if (node->isLeaf()){
-            delete node->get_valor();
-            delete node;
+        /*
+            if(node->get_parent()->get_right() == node){
+                node->get_parent()->set_right(NULL);
+            }
+            else if(node->get_parent()->get_left() == node){
+                node->get_parent()->set_left(NULL);
+            }*/
+            node->set_tdata("NO");
+
         }
         else if (node->rightChildOnly())
         {
@@ -335,7 +347,7 @@ BSTNode<T> * BST<T>::remove(BSTNode<T>* node, T data)
             BSTNode<T>* aux = node;
             node = node->get_left();
             delete aux->get_valor();
-            //delete aux;
+            delete aux;
         }
 
         // The node has two children (left and right)
@@ -344,8 +356,6 @@ BSTNode<T> * BST<T>::remove(BSTNode<T>* node, T data)
             // Find successor or predecessor to avoid quarrel
             T successor_data = this->successor(data);
             Aeropuertos* valor = search(this->root,successor_data)->get_valor();
-
-            delete node->get_valor();
 
             // Replace node's key with successor's key
             node->set_data(successor_data,valor);
