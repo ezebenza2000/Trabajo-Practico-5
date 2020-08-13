@@ -2,7 +2,13 @@
 #define GRAFO_H
 
 #include <iostream>
+#include "Vuelos.h" //ad oc
+#include "BST.h"
+#include "Etiqueta.h"
 #include "Vertice.h"
+#include "Costos.h"
+#include "Lista.h"
+#include "Pila.h"
 
 
 using namespace std;
@@ -17,18 +23,13 @@ y otro al vertice destino que apunta.
 
 class Grafo
 {
-    private:
-      Vertice *h;
-      void anular();
-
-      //Recibe la ruta de origen y destino para saber que "VIAJE" borrar
-      void eliminarArista(Vertice *origen, Vertice *destino);
-
-      //Recibe la direccion del vertice que quiere borrar
-      void eliminarVertice(Vertice *vert);
-
-      //Con la direccion de memoria y los valores recibido crea una nueva arista
-      void insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV);
+    private:        /*ad oc*/
+      Lista<Vertices<Vuelos>> adyasencia;
+      
+      //PRE:Recibe una arista cargada
+      //POST: Añade la arista al final de la lista de aristas del vertice
+      void insertaArista(Arista* arista);
+      
 
     public:
         //Constructor
@@ -40,10 +41,6 @@ class Grafo
         //pregunta si esta vacio
         bool vacio();
 
-        //PRE:objeto creado;
-        //POST: Devuelve la cantidad de vertices;
-        int tam();
-
         //Realiza un print grafico que muestra el grafo
         void listaAdyacencia();
 
@@ -54,17 +51,19 @@ class Grafo
         //PRE: Grafo ya inicializado
         //POST: Agrega un vertice al final de la lista de vertices
         void inserta_vertice(string nombre);
+        
+        //PRE: Grafo ya inicializado
+        //POST: Agrega un vertice al final de la lista de vertices
+        void inserta_vertice(string nombre);
 
-        //PRE:Recibe el nombre del vertice origen, el del destino, el precio y el tiempo
-        //POST: Crea una arista adyacente al vertice origen con los datos;
-        void inserta_arista(string origen, string destino, int precio, int tiempo);
-
-        //PRE: Recibe el nombre del vertice origen y del destino
-        //para saber que arista es
-        //POST: De existir una arista con cierto camino se borra.
-        void eliminar_arista(string origen, string destino);
-
+        //PRE: Recibe un string
+        //POST: Elimina el vertice con dicho nombre
         void eliminar_vertice(string vertice);
+        
+        
+        Lista<Etiqueta<Vuelos>> Grafo::camino_minimo(string origen, string destino, char t)(string origen, string destino);
+
+
 };
 
 

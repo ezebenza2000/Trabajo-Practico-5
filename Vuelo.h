@@ -3,35 +3,17 @@
 
 class Vuelo{
     private:
-        int precio;
-        int tiempo;
+        int precio = 0;
+        float tiempo = 0;
 
     public:
-        Vuelo(int precio, int tiempo);
+        Vuelo(int precio, float tiempo);
+        Vuelo();
+        Vuelo operator+(Vuelo a);
+        Vuelo operator=(Vuelo a);
         void set_precio(int precio);
         int get_precio();
-        void set_tiempo(int tiempo);
-        int get_tiempo();
+        void set_tiempo(float tiempo);
+        float get_tiempo();
 };
-
-Vuelo :: Vuelo(int precio, int tiempo){
-    this->precio = precio;
-    this->tiempo = tiempo;
-}
-
-void Vuelo :: set_precio(int precio){
-    this->precio = precio;
-}
-
-int Vuelo :: get_precio(){
-    return this->precio;
-}
-
-void Vuelo :: set_tiempo(int tiempo){
-    this->tiempo = tiempo;
-}
-
-int Vuelo :: get_tiempo(){
-    return this->tiempo;
-}
 #endif // VUELO_H_INCLUDED

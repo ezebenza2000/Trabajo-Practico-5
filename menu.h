@@ -4,6 +4,7 @@
 #include "BST.h"
 #include "aeropuertos.h"
 #include "t_menu.h"
+#include "menuAerp.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ public:
     BST<string>* diccionario;
 
     char opcion;
+    menuAerp mA(diccionario);
 
     //cosntructor
     Menu(BST<string>* Diccionario_de_Aeropuertos);

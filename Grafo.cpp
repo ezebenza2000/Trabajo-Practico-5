@@ -2,32 +2,27 @@
 
 
 Grafo::Grafo(){
-    h = NULL;
+	
 }
 
+Grafo::~Grafo(){
+	
+}
+
+
 bool Grafo::vacio(){
-    if (h == NULL){
+    if (this->adyasencia.lista_vacia()){
         return true;
     }
     return false;
 }
 
-int Grafo::tam(){
-    int contador = 0;
-    Vertice *aux;
-    aux = h;
-    while(aux != NULL){
-        contador++;
-        aux = aux->get_sig_vertice();
-    }
-    return contador;
-}
-
 Vertice *Grafo::getVertice(string nombre){
-    Vertice *aux;
-    aux = h;
-    while ( aux != NULL ){
-        if (aux->get_nombre() == nombre){
+	unsigned pos;
+	Vertice<Vuelos> *aux;
+    for( pos=0; pos<this->adyasencia.get_tam(); pos++){
+    	aux=*adyasencia.get_dato(pos);
+        if ( *aux.get_nombre()== nombre){
             return aux;
         }
         aux = aux->get_sig_vertice();
@@ -36,154 +31,124 @@ Vertice *Grafo::getVertice(string nombre){
 }
 
 void Grafo::inserta_vertice(string nombre){
-    Vertice *nuevo = new Vertice(nombre);
-    nuevo->set_nombre(nombre);
-    nuevo->set_sig_vertice(NULL);
-    nuevo->set_adyacente(NULL);
-
-    if (vacio()){
-        h = nuevo;
-    }
-    else{
-        Vertice *aux;
-        aux = h;
-        while(aux->get_sig_vertice() != NULL){
-            aux = aux->get_sig_vertice();
-        }
-        aux->set_sig_vertice(nuevo);
-    }
+    Vertice<Vuelos> *nuevo = new Vertice(nombre);
+    this->adyasencia.insert(nuevo);
 }
 
-void Grafo::insertaArista(Vertice *origen, Vertice *destino, int precio, int tiempo, string origenV){
-    Arista *nueva ;
-    Vuelo *nuevo;
-    nuevo->set_precio(precio);
-    nuevo->set_tiempo(tiempo);
-    nueva = new Arista(nuevo);
-    nueva->set_origen(origenV);
-    nueva->set_sig_adyacente(NULL);
-    nueva->set_sig_arista(NULL);
-
-    Arista *aux;
-    aux = origen->get_adyacente();
-    if (aux == NULL){
-        origen->set_adyacente(nueva);
-        nueva->set_sig_adyacente(destino);
-    }
-    else{
-        while ( aux->get_arista() != NULL){
-            aux = aux->get_arista();
-        }
-        aux->set_sig_arista(nueva);
-        nueva->set_sig_adyacente(destino);
-    }
+void Grafo::insertaArista(Arista *arisata){
+	Vertice<Vuelos> *aux;
+	aux=this->getVertice(*arista.get_origin);
+	*aux.aristas.insert(arista);
 }
 
-
-void Grafo::inserta_arista(string origen, string destino, int precio, int tiempo){
-    insertaArista(getVertice(origen), getVertice(destino), precio, tiempo, origen);
-}
 
 void Grafo::listaAdyacencia(){
-    Vertice *vertAux;
-    Arista *arisAux;
-    vertAux = h;
-    while(vertAux != NULL){
-        cout<<vertAux->get_nombre()<<"->";
-        arisAux = vertAux->get_adyacente();
-        while(arisAux != NULL){
-            cout<<arisAux->get_adyacente()->get_nombre()<<"->";
-            arisAux = arisAux->get_arista();
+	
+    Vertice<Vuelos> *vertAux;
+    Vertice<Vuelos> *ady;
+    Aristas<Vuelos> *arisAux;
+    
+    unsigned pos=1;
+    
+    vertAux = this->adyasencia.get_dato(pos);
+    
+	while(vertAux != NULL){
+    	
+        cout<<*vertAux->get_nombre()<<"->";
+        unsigned pos2=1;
+        
+        while(pos2<*vertAux.aristas.get_tam()){
+        	
+        	arisAux=vertAux.aristas.get_dato(pos2);
+        	ady=*arisAux.get_adyacente();
+            cout<<*ady.get_nombre()<<"->";
+            pos2++
         }
-        vertAux = vertAux->get_sig_vertice();
         cout<<endl;
+        pos++;
     }
 }
 
-void Grafo::anular(){
-    Vertice *aux;
 
-    while(h != NULL){
-        aux = h;
-        h = h->get_sig_vertice();
-        delete aux;
+Lista<Etiqueta<Vuelos>> Grafo::camino_minimo(string origen, string destino, char t){
+	
+	Lista<Etiqueta<Vuelos>> camino_minimo;
+    Lista<Etiqueta<Vuelos>> etiquetas;
+    
+    Etiqueta<Vuelos> *cargaEt;    
+    Arista<Vuelos> *cargaAri;
+    Vertice<Vuelos> *cargaVert;
+    
+    Vertice<Vuelos> *auxV; 
+    Etiqueta<Vuelos> auxcargv;
+    Vuelos auxVue;
+    
+    unsigned posOr, posFin;
+    unsigned  posAr, posEt, posVer;
+    
+	
+    
+    for( posVer=1; posVer<this->adyasencia.get_tam(); posVer++){
+    	
+    	*cargaVert=this->adyasencia.get_nodo(posVer);
+    	
+    	*cargaEt.invariante=false;
+    	if(*cargaVert.get_nombre()==origen){
+    		posOr=posVer;
+    		*cargaEt.invariante=true;
+		}
+		
+		if(*cargaVert.get_nombre()==destino){
+			posFin=posVer;
+		}
+		*cargaEt.nombre_vertice=cargaVert.get_nombre();
+		etiquetas.insert(cargaEt);
+		
+	}
+    
+    posEt=0;
+    auxVue.set_precio(0);
+    auxVue.set_tiempo(0);
+    cargaEt.peso_llegada=auxVue;
+    posVer=posOr;
+    
+    cargaVert=this->adyasencia.get_dato(posVer);
+    
+    while( cargaVert!=this->adyasencia.get_dato(posFin)){
+    	
+		cargaVert=this->adyasencia.get_dato(posVer);
+		
+    	for( posAr=1; posAr<(cargaVert->aristas.get_tam()); posAr++){
+    		
+    		cargaAri=cargaVert->aristas.get_dato(posAr);
+    		auxV=cargaAri.get_adyacente();
+    		
+    		posEt=0;
+    		while(auxV->get_nombre()!=cargaEt->nombre_vertic){
+    			posEt++;
+        	    cargaEt=etiquetas.get_dato(posEt);
+    	    }
+    	    
+    	    auxVue=cargaAri->get_vuelo();
+    	    cargaEt->peso_llegada=(cargaEt->peso_llegada+auxVue);
+    	    if(((auxcargv->get_tiempo() < cargaEt->peso_llegada.get_tiempo()) && (t =='t'))&&(!cargaEt.invariante)) etiquetas.set_dato(posEt,*cargaEt);
+    	    if(((auxcargv->get_precio() < cargaEt->peso_llegada.get_precio()) && (t =='p'))&&(!cargaEt.invariante)) etiquetas.set_dato(posEt,*cargaEt);
+		}
+    	 for(posEt=1;posEt<(etiquetas.get_tam()-1);posEt++){
+        	cargaEt=etiquetas.get_dato(posEt);
+        	auxcargv=cargaEt;
+        	if(((auxcargv->get_tiempo() < cargaEt->peso_llegada.get_tiempo()) && (t =='t'))&&(!cargaEt.invariante)){
+        		auxcargv=cargaEt;
+        		posVer=posEt;
+        	}
+    	    if(((auxcargv->get_precio() < cargaEt->peso_llegada.get_precio()) && (t =='p'))&&(!cargaEt.invariante)){
+    	    	auxcargv=cargaEt;
+        		posVer=posEt;
+    	    }
+		}
+	    auxcargv->invariante=true;
+	    camino_minimo.insert(auxcargv);
     }
+    
+    return camino_minimo;
 }
-
-void Grafo::eliminarArista(Vertice *origen, Vertice *destino){
-    Arista *actual, *anterior;
-    actual = origen->get_adyacente();
-
-
-    if(actual == NULL){
-        cout<<"El vertice origen no tiene aristas"<<endl;
-    }
-    else if (actual->get_adyacente() == destino){
-        origen->set_adyacente(actual->get_arista());
-        actual->set_sig_adyacente(NULL);
-        delete actual;
-    }
-    else{
-        int aux = 1;
-        while(actual != NULL && aux == 1 ){
-            anterior = actual;
-            actual = actual->get_arista();
-            if (actual->get_adyacente() == destino){
-                anterior->set_sig_arista(actual->get_arista());
-                actual->set_sig_adyacente(NULL);
-                actual->set_sig_arista(NULL);
-                delete actual;
-                aux = 0;
-            }
-        }
-        if (aux == 1){
-            cout << "Esos dos vertices no estan conectados" << endl;
-        }
-    }
-}
-
-void Grafo::eliminar_arista(string origen, string destino){
-    eliminarArista(getVertice(origen),getVertice(destino));
-}
-
-void Grafo::eliminarVertice(Vertice *vert){
-    Vertice *actual, *anterior;
-    Arista *aux;
-
-    actual = h;
-
-    while(actual != NULL ){
-
-        aux = actual->get_adyacente();
-        int i = 0;
-        while(aux != NULL && i == 0){
-            if(aux->get_adyacente() == vert){
-                eliminarArista(actual, aux->get_adyacente());
-                i++;
-            }
-            aux = aux->get_arista();
-        }
-        actual = actual->get_sig_vertice();
-    }
-    actual = h;
-    if (h == vert){
-        h = h->get_sig_vertice();
-        actual->set_adyacente(NULL);
-        actual->set_sig_vertice(NULL);
-        delete actual;
-    }
-    else{
-        while(actual != vert){
-            anterior = actual;
-            actual = actual->get_sig_vertice();
-        }
-        anterior->set_sig_vertice(actual->get_sig_vertice());
-        delete actual;
-    }
-}
-
-void Grafo::eliminar_vertice(string vertice){
-    eliminarVertice(getVertice(vertice));
-}
-
-

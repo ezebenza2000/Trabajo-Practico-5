@@ -17,7 +17,7 @@ void Menu::mostrarMenu(){
     cout << "\t3. Baja\n";
     cout << "\t4. InOrder\n";
     cout << "\t5. Ancho\n";
-    cout << "\t6. Abrir el menu de Grafos\n";
+    cout << "\t6. Abrir el menu de Vuelos\n";
     cout << "\t7. Salir\n";
     cout << "\tIngrese el numero de la opcion que desea seleccionar: ";
     cin >> opcion;
@@ -26,7 +26,8 @@ void Menu::mostrarMenu(){
 
 bool Menu::selectorDeOpciones() {
 
-    bool estado = true;
+   while(opcion!='7'){
+   	 bool estado = true;
 
     switch (this->opcion) {
 
@@ -84,7 +85,8 @@ bool Menu::selectorDeOpciones() {
         }
         
         case '6': {
-        	
+        	this->mA.mostrarMenu();
+        	this->mA.selectorDeOpciones();
             break;
         }
 
@@ -98,6 +100,7 @@ bool Menu::selectorDeOpciones() {
             break;
         }
     }
+   }
     return estado;
 }
 
