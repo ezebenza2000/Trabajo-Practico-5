@@ -38,8 +38,6 @@ class Grafo
 
       void camino_minimo_t(Vertice *origen, Vertice *destino);
 
-
-
     public:
         //Constructor
         Grafo();
