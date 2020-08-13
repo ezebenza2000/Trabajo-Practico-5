@@ -335,7 +335,7 @@ BSTNode<T> * BST<T>::remove(BSTNode<T>* node, T data)
             BSTNode<T>* aux = node;
             node = node->get_left();
             delete aux->get_valor();
-            delete aux;
+            //delete aux;
         }
 
         // The node has two children (left and right)
@@ -344,6 +344,8 @@ BSTNode<T> * BST<T>::remove(BSTNode<T>* node, T data)
             // Find successor or predecessor to avoid quarrel
             T successor_data = this->successor(data);
             Aeropuertos* valor = search(this->root,successor_data)->get_valor();
+
+            delete node->get_valor();
 
             // Replace node's key with successor's key
             node->set_data(successor_data,valor);

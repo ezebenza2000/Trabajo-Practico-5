@@ -246,7 +246,7 @@ void Grafo::camino_minimo_p(Vertice *origen, Vertice *destino){
             costoActual = costoActual + aux->get_precio();   //le sumo el precio para calcular el costo final
 
             for ( int i = 1; i <= listaCosto.get_tam(); i++){
-                cout << "la cantidad de vueltas que da el for = " << i << endl;
+                //cout << "la cantidad de vueltas que da el for = " << i << endl;
                 if(aux->get_adyacente() == listaCosto.get_dato(i)->get_vertice()){
 
                     bandera = 1;
@@ -352,7 +352,7 @@ void Grafo::camino_minimo_t(Vertice *origen, Vertice *destino){
             costoActual = costoActual + aux->get_tiempo();   //le sumo el precio para calcular el costo final
 
             for ( int i = 1; i <= listaCosto.get_tam(); i++){
-                cout << "la cantidad de vueltas que da el for = " << i << endl;
+                //cout << "la cantidad de vueltas que da el for = " << i << endl;
                 if(aux->get_adyacente() == listaCosto.get_dato(i)->get_vertice()){
 
                     bandera = 1;
