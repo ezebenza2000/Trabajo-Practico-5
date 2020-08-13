@@ -33,7 +33,7 @@ void Arista::set_origen(string origen){
 string Arista::get_origen(){
     return this->origen;
 }
-float Arista::get_precio(){
+int Arista::get_precio(){
     return this->viaje->get_precio();
 }
 

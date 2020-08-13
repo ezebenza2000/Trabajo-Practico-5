@@ -126,8 +126,11 @@ void Archivos :: cargar_vuelo(string datos, Grafo* grafo_vuelos){
             numeroDeDato++;
             marcaIndice = i+1;
             int auxEntero;
+            float auxFlotante;
             stringstream ss(elemento);
             ss >> auxEntero;
+            stringstream sf(elemento);
+            sf >> auxFlotante;
             switch(numeroDeDato){
                 case 1:{
                     aux1String = elemento;
@@ -144,7 +147,7 @@ void Archivos :: cargar_vuelo(string datos, Grafo* grafo_vuelos){
                     break;
                 }
                 case 4:{
-                    auxTiempo = auxEntero;
+                    auxTiempo = auxFlotante;
                     grafo_vuelos->inserta_arista(aux1String,aux2String,auxPrecio,auxTiempo);
                     break;
                 }

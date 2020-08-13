@@ -25,7 +25,7 @@ class Arista{
     void set_sig_adyacente(Vertice * adyacente);
     void set_origen(string origen);
     string get_origen();
-    float get_precio();
+    int get_precio();
     float get_tiempo();
     Vuelo* get_vuelo();
 

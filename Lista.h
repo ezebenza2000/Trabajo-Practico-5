@@ -137,7 +137,7 @@ void Lista<Dato>::del_dato(int pos)
         borrar = anterior->get_siguiente();
         anterior->set_siguiente(borrar->get_siguiente());
     }
-    //delete borrar->get_dato();
+    delete borrar->get_dato();
     delete borrar;
     tam--;
 }
