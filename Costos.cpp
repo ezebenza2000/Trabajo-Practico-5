@@ -7,11 +7,10 @@ Costo::Costo(Vertice *vertice, int costo){
 }
 
 Costo :: Costo(){
-	
 }
 
 Costo::~Costo(){
-    delete vertice;
+    vertice = 0;
 }
 
 Vertice * Costo::get_vertice(){

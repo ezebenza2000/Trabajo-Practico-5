@@ -96,11 +96,13 @@ bool Menu::selectorDeOpciones() {
 
         case '6': {
             int opcion_grafo;
-            cout << "\n1. Consultar por menor costo";
-            cout << "\n2. Consultar por menor duracion";
-            cout << "\n3. Ver grafo"<< endl;
-            cout << "Eleccion: ";
-            cin >> opcion_grafo;
+            do{
+                cout << "\n1. Consultar por menor costo";
+                cout << "\n2. Consultar por menor duracion";
+                cout << "\n3. Ver grafo"<< endl;
+                cout << "Eleccion: ";
+                cin >> opcion_grafo;
+            }while(opcion_grafo < 1 && opcion_grafo > 3);
             trabaja_grafo(opcion_grafo);
             break;
         }
@@ -159,10 +161,10 @@ void Menu :: trabaja_grafo(int opcion_grafo){
         salida = aMayuscula(salida);
         destino = aMayuscula(destino);
         if(opcion_grafo == 1){
-            grafoVuelos->camino_minimo(salida,destino); //costo
+            grafoVuelos->camino_minimo(salida,destino,1); //costo
         }
         else if(opcion_grafo == 2){
-            grafoVuelos->camino_minimo(salida,destino); //duracion
+            grafoVuelos->camino_minimo(salida,destino,2); //duracion
         }
     }
     else if (opcion_grafo == 3){

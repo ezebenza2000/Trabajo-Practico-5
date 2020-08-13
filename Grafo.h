@@ -34,7 +34,11 @@ class Grafo
       //Con la direccion de memoria y los valores recibido crea una nueva arista
       void insertaArista(Vertice *origen, Vertice *destino, int precio, float tiempo, string origenV);
 
-      void camino_minimo(Vertice *origen, Vertice *destino);
+      void camino_minimo_p(Vertice *origen, Vertice *destino);
+
+      void camino_minimo_t(Vertice *origen, Vertice *destino);
+
+
 
     public:
         //Constructor
@@ -75,7 +79,7 @@ class Grafo
         //POST: Elimina el vertice con dicho nombre
         void eliminar_vertice(string vertice);
 
-        void camino_minimo(string origen, string destino);
+        void camino_minimo(string origen, string destino, int opcion);
 
 
 };

@@ -49,9 +49,8 @@ Nodo<Dato>::Nodo(Dato* d)
 
 template < typename Dato >
 Nodo<Dato>::~Nodo() {
-    psig = 0;
-    delete psig;
     dato = 0;
+    psig = 0;
     delete dato;
 }
 
