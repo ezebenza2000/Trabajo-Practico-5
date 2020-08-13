@@ -204,9 +204,9 @@ void Grafo::camino_minimo_p(Vertice *origen, Vertice *destino){
     Pila<VerticeVertice> pilaVertice; //La cola guarda 2 vertices
 
     VerticeVertice* aux2;
-    Costo * costoAux = new Costo(origen, 0);//*
+    Costo * costoAux = new Costo(origen, 0);
     listaCosto.insert(costoAux); //Inserto el primer vertice con costo cero
-    costoAux = new Costo(origen, 0);//*
+    costoAux = new Costo(origen, 0);
     listaOrdenada.insert(costoAux); //Inserto el primer vertice con costo cero
 
     int bandera, bandera2 = 0;
@@ -272,9 +272,9 @@ void Grafo::camino_minimo_p(Vertice *origen, Vertice *destino){
             }
 
             if (bandera == 0){
-                costoAux = new Costo(aux->get_adyacente(),costoActual);//*
+                costoAux = new Costo(aux->get_adyacente(),costoActual);
                 listaCosto.insert(costoAux);
-                costoAux = new Costo(aux->get_adyacente(),costoActual);//*
+                costoAux = new Costo(aux->get_adyacente(),costoActual);
                 listaOrdenada.insert(costoAux);
 
                 listaOrdenada.lista_sort();
@@ -294,8 +294,6 @@ void Grafo::camino_minimo_p(Vertice *origen, Vertice *destino){
     if (bandera2 == 0){
         cout << "No hay ruta entre esos dos vertices"<< endl;
     }
-<<<<<<< HEAD
-=======
 
     costoAux = 0;
     aux = 0;
@@ -303,7 +301,6 @@ void Grafo::camino_minimo_p(Vertice *origen, Vertice *destino){
 
     verticeActual = 0;
     destinoActual = 0;
->>>>>>> b8a102d4366a02b436d8134b85f536477b6d6c57
 }
 
 
@@ -313,9 +310,9 @@ void Grafo::camino_minimo_t(Vertice *origen, Vertice *destino){
     Pila<VerticeVertice> pilaVertice; //La cola guarda 2 vertices
 
     VerticeVertice* aux2;
-    Costo * costoAux = new Costo(origen, 0);//*
+    Costo * costoAux = new Costo(origen, 0);
     listaCosto.insert(costoAux); //Inserto el primer vertice con costo cero
-    costoAux = new Costo(origen, 0);//*
+    costoAux = new Costo(origen, 0);
     listaOrdenada.insert(costoAux); //Inserto el primer vertice con costo cero
 
     int bandera, bandera2 = 0;
@@ -381,9 +378,9 @@ void Grafo::camino_minimo_t(Vertice *origen, Vertice *destino){
             }
 
             if (bandera == 0){
-                costoAux = new Costo(aux->get_adyacente(),costoActual);//*
+                costoAux = new Costo(aux->get_adyacente(),costoActual);
                 listaCosto.insert(costoAux);
-                costoAux = new Costo(aux->get_adyacente(),costoActual);//*
+                costoAux = new Costo(aux->get_adyacente(),costoActual);
                 listaOrdenada.insert(costoAux);
 
                 listaOrdenada.lista_sort();
@@ -403,14 +400,10 @@ void Grafo::camino_minimo_t(Vertice *origen, Vertice *destino){
     if (bandera2 == 0){
         cout << "No hay ruta entre esos dos vertices"<< endl;
     }
-<<<<<<< HEAD
-}
-=======
 
     costoAux = 0;
     aux = 0;
     aux2 = 0;
->>>>>>> b8a102d4366a02b436d8134b85f536477b6d6c57
 
     verticeActual = 0;
     destinoActual = 0;
